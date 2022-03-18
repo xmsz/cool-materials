@@ -1,6 +1,6 @@
 {
   "name": "@cool-in/material-page-headings",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "intro component",
   "files": [
     "demo/",
@@ -18,7 +18,7 @@
   ],
   "scripts": {
     "start": "build-scripts start",
-    "build": "build-scripts build && npm run build:vite",
+    "build": "build-scripts build && npm run build:vite && cp es/style.css lib",
     "build:vite": "vite build",
     "test": "build-scripts test",
     "prepublishOnly": "npm run build",
@@ -66,5 +66,5 @@
     "access": "public"
   },
   "license": "MIT",
-  "homepage": "https://unpkg.com/@cool-in/material-page-headings@1.0.1/build/index.html"
+  "homepage": "https://unpkg.com/@cool-in/material-page-headings@1.0.2/build/index.html"
 }

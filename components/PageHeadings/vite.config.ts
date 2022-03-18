@@ -6,22 +6,18 @@ import transformerDirective from '@unocss/transformer-directives';
 import path from 'path';
 
 export default defineConfig({
-  define: {
-    VITE: true,
-  },
   build: {
     lib: {
       entry: path.resolve(__dirname, 'vite.ts'),
       name: 'index',
       formats: ['es'],
     },
-    outDir: 'lib',
+    outDir: 'es',
     emptyOutDir: false,
     rollupOptions: {
       external: ['react', '@alifd/next'],
     },
   },
-
   plugins: [
     Unocss({
       presets: [presetUno(), presetIcons()],
