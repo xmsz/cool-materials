@@ -2,7 +2,6 @@ import { Button } from '@alifd/next';
 import { ButtonProps } from '@alifd/next/types/button';
 import * as React from 'react';
 import { ReactNode } from 'react';
-import 'uno.css';
 import './style.css';
 
 export interface PageHeadingsProps {
