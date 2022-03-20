@@ -12,7 +12,9 @@
     "stylelint": "stylelint \"**/*.{css,scss,less}\"",
     "prepublishOnly": "npm run generate"
   },
-  "files": ["build"],
+  "files": [
+    "build"
+  ],
   "devDependencies": {
     "@ice/screenshot": "^0.1.1",
     "@iceworks/spec": "^1.0.0",
@@ -21,6 +23,11 @@
   },
   "materialConfig": {
     "template": "@icedesign/ice-react-ts-material-template",
-    "type": "react"
+    "type": "react",
+    "fusion-site": {
+      "id": 9700,
+      "name": "阿里",
+      "url": "https://fusion.design/api/v1/sites/9700/materials"
+    }
   }
 }

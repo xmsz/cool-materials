@@ -1,0 +1,61 @@
+{
+  "name": "@cool-in/manage-scaffold",
+  "version": "0.1.0",
+  "description": "intro scaffold",
+  "files": [
+    ".vscode/",
+    "src/",
+    "build/",
+    "public/",
+    "tests/",
+    "_gitignore",
+    "_editorconfig",
+    "_eslintignore",
+    "_eslintrc.js",
+    "_prettierignore",
+    "_prettierrc.js",
+    "_stylelintignore",
+    "_stylelintrc.js",
+    "build.json",
+    "screenshot.png",
+    "tsconfig.json",
+    "jsconfig.json"
+  ],
+  "scripts": {
+    "start": "icejs start",
+    "build": "icejs build",
+    "screenshot": "../../node_modules/.bin/screenshot -l",
+    "prepublishOnly": "npm run build && npm run screenshot",
+    "eslint": "eslint --cache --ext .js,.jsx,.ts,.tsx ./",
+    "eslint:fix": "npm run eslint -- --fix",
+    "stylelint": "stylelint \"**/*.{css,scss,less}\"",
+    "lint": "npm run eslint && npm run stylelint"
+  },
+  "dependencies": {
+    "@alifd/next": "1.25.27",
+    "@alifd/theme-design-pro": "^0.8.0",
+    "@cool-in/material-page-headings": "^1.0.2",
+    "@uni/apis": "^1.1.10",
+    "@uni/storage": "^1.0.9",
+    "ahooks": "^3.1.13",
+    "dayjs": "^1.11.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "devDependencies": {
+    "@iceworks/spec": "^1.0.0",
+    "@iconify-json/ic": "^1.1.2",
+    "eslint": "^7.0.0",
+    "ice.js": "^2.0.0",
+    "stylelint": "^13.2.0",
+    "unocss": "^0.29.3"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scaffoldConfig": {
+    "name": "cool-manage-scaffold",
+    "title": "管理后台",
+    "category": "Pro"
+  }
+}
