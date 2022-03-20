@@ -3,6 +3,7 @@ import { defaultPropsConfig } from '@/layouts/BasicLayout';
 import { ConfigProvider } from '@alifd/next';
 import { useState, ComponentType } from 'react';
 import ReactDom from 'react-dom';
+import store from '@/store';
 
 const CompWrapper = <T extends { onClose?: () => void }>({
   Comp,
@@ -17,14 +18,16 @@ const CompWrapper = <T extends { onClose?: () => void }>({
       // @ts-ignore type
       defaultPropsConfig={defaultPropsConfig}
     >
-      <Comp
-        {...props}
-        visible={visible}
-        onClose={() => {
-          setVisible(false);
-          props.onClose?.();
-        }}
-      />
+      <store.Provider>
+        <Comp
+          {...props}
+          visible={visible}
+          onClose={() => {
+            setVisible(false);
+            props.onClose?.();
+          }}
+        />
+      </store.Provider>
     </ConfigProvider>
   );
 };
