@@ -1,4 +1,6 @@
 /* eslint-disable @typescript-eslint/indent */
+import { defaultPropsConfig } from '@/layouts/BasicLayout';
+import { ConfigProvider } from '@alifd/next';
 import { useState, ComponentType } from 'react';
 import ReactDom from 'react-dom';
 
@@ -11,14 +13,19 @@ const CompWrapper = <T extends { onClose?: () => void }>({
 }) => {
   const [visible, setVisible] = useState(true);
   return (
-    <Comp
-      {...props}
-      visible={visible}
-      onClose={() => {
-        setVisible(false);
-        props.onClose?.();
-      }}
-    />
+    <ConfigProvider
+      // @ts-ignore type
+      defaultPropsConfig={defaultPropsConfig}
+    >
+      <Comp
+        {...props}
+        visible={visible}
+        onClose={() => {
+          setVisible(false);
+          props.onClose?.();
+        }}
+      />
+    </ConfigProvider>
   );
 };
 
