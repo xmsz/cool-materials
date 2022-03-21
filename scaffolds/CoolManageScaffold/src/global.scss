@@ -53,7 +53,9 @@ pre {
   --text-gray-200: rgb(229, 231, 235);
   --text-gray-400: rgba(156, 163, 175, var(--un-text-opacity, 1));
   --text-gray-500: rgb(107 114 128);
+  --text-gray-600: rgba(75, 85, 99, var(--un-text-opacity, 1));
   --text-gray-700: rgba(55, 65, 81, var(--un-text-opacity, 1));
+  --text-gray-800: rgba(31, 41, 55, var(--un-text-opacity, 1));
   --text-gray-900: rgba(17, 24, 39, var(--un-text-opacity, 1));
   --text-indigo-600: rgba(79, 70, 229, var(--un-text-opacity, 1));
   --bg-gray-50: rgba(249, 250, 251, var(--un-bg-opacity, 1));
@@ -241,10 +243,57 @@ pre {
   --message-success-color-border-toast: var(--border-gray-200);
   --message-success-color-content-addon: var(--text-gray-500);
   --message-success-color-content-toast: var(--text-gray-500);
-
   --message-size-l-title-font: 18px;
   --message-size-l-title-content-padding-left: 4px;
+
+  // Nav
+  --nav-line-text-color: var(--text-gray-600);
+  --nav-line-text-style: 500;
+  --nav-line-item-selected-text-color: var(--text-gray-800);
+  --nav-line-item-selected-bg-color: var(--bg-gray-100);
+  --nav-ver-item-corner: 8px;
+  --nav-line-item-hover-text-color: var(--text-gray-800);
+  --nav-line-item-hover-text-style: 500;
 }
+
+// Nav
+.next-nav {
+  &.next-line {
+    .next-menu-item .next-menu-item-text {
+      display: flex;
+      align-items: center;
+    }
+    .next-nav-icon.next-icon {
+      flex-shrink: 0;
+      width: 24px;
+      height: 24px;
+      display: block;
+      color: var(--text-gray-400);
+    }
+
+    &.next-icon-only {
+      .next-nav-icon.next-icon {
+        color: var(--text-gray-600);
+      }
+      .next-selected {
+        .next-nav-icon.next-icon {
+          color: var(--text-gray-800);
+        }
+      }
+    }
+  }
+}
+
+// .next-nav.next-menu-selectable-single .next-menu-item.next-selected .next-menu-item-inner::before {
+//   @apply hidden;
+// }
+// .next-nav.next-normal .next-nav-item.next-menu-item:not(.next-selected):hover {
+//   @apply bg-transparent;
+// }
+
+// .next-nav.next-icon-only .next-nav-item .next-nav-icon.next-icon {
+//   @apply text-gray-600;
+// }
 
 // Select
 .next-select-multiple {
@@ -739,4 +788,9 @@ pre {
 }
 .col-span-1 {
   grid-column: span 1 / span 1;
+}
+
+// Icon
+.next-icon-list-alt {
+  @apply i-ic-sharp-list-alt;
 }
