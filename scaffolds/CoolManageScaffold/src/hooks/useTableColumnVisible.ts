@@ -29,9 +29,7 @@ export default ({ columns, storageKey }: { columns: ColumnProps[]; storageKey: s
   const columnsVisible = useMemo(
     () =>
       columnVisibleKeys
-        ? columns.filter(
-            (item) => (item.dataIndex && columnVisibleKeys.includes(item.dataIndex)) || item.dataIndex === '_actions',
-          )
+        ? columns.filter((item) => (item.dataIndex && columnVisibleKeys.includes(item.dataIndex)) || !item.dataIndex)
         : columns,
     [columns, columnVisibleKeys],
   );

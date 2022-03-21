@@ -25,17 +25,20 @@ const Button = ({
 
 const Divider = () => <i className="block h-5 w-1px bg-white bg-opacity-30 ml-6 mr-3" />;
 
-const HeaderSelectActionBar = (props: PropsWithChildren<{ columns: ColumnProps[][]; selectedRowKeys: string[] }>) => (
+const HeaderSelectActionBar = ({
+  selectedRowKeys,
+  ...props
+}: PropsWithChildren<{ columns: ColumnProps[][]; selectedRowKeys: string[] }>) => (
   <TableHeader {...props}>
     <tr>
       <TableCell
         colSpan={props.columns[props.columns.length - 1].length}
         className={`next-no-padding bg-indigo-500 text-white text-sm py-0 ${
-          props.selectedRowKeys.length > 0 ? '' : 'hidden'
+          selectedRowKeys.length > 0 ? '' : 'hidden'
         }`}
       >
         <div className={'flex items-center px-4'}>
-          <span>已选择{props.selectedRowKeys.length}条记录</span>
+          <span>已选择{selectedRowKeys.length}条记录</span>
           <Divider />
           {props.children}
         </div>
