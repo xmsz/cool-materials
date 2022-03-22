@@ -7,6 +7,7 @@ import dayjs from 'dayjs';
 import { MessageProps } from '@alifd/next/types/message';
 import { useHover } from 'ahooks';
 import HeaderSelectActionBar from './HeaderSelectActionBar';
+import { clipboard } from '@uni/apis';
 
 const TablePlus = {
   Scroll: ScrollTable,
@@ -177,6 +178,7 @@ const TablePlus = {
                   className={` ml-2 inline-block align-middle cursor-pointer p-1 rounded ${
                     isHover || isOpen ? 'opacity-100 bg-gray-100' : 'opacity-0'
                   }`}
+                  title="编辑"
                 >
                   <i className={'block i-ic-sharp-edit w-3 h-3 bg-gray-400 hover:bg-gray-500'} ref={ref} />
                 </div>
@@ -212,6 +214,36 @@ const TablePlus = {
                 </Button>
               </div>
             </Balloon.Tooltip>
+          </div>
+        );
+      };
+
+      return <Comp />;
+    },
+    Link: (value: string, index?: number, record?: any, context?: any) => {
+      const Comp = () => {
+        const hoverRef = useRef<null | HTMLDivElement>(null);
+        const isHover = useHover(hoverRef);
+
+        return (
+          <div ref={hoverRef}>
+            <a href={value} target="_blank">
+              {value}
+            </a>
+            <div
+              className={`ml-2 inline-block align-middle cursor-pointer p-1 rounded ${
+                isHover ? 'opacity-100 bg-gray-100' : 'opacity-0'
+              }`}
+              title="复制"
+              onClick={() => {
+                clipboard.setClipboard({
+                  text: value,
+                  success: Message.success('复制成功'),
+                });
+              }}
+            >
+              <i className={'block i-ic-sharp-copy-all w-3 h-3 bg-gray-400 hover:bg-gray-500'} />
+            </div>
           </div>
         );
       };

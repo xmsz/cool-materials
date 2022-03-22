@@ -19,6 +19,7 @@ export default {
     async Refresh(payload: undefined, rootState: IRootState) {
       const group = await groupService.Search();
       dispatch.group.Update(group);
+      return group;
     },
   }),
 };
