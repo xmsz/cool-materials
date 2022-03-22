@@ -21,6 +21,7 @@ import { GroupSelect } from '@/components/GroupForm';
 import store from '@/store';
 import { useParams, useRequest, useHistory } from 'ice';
 import groupService from '@/service/group';
+import PageHeadingsMoreButton from '@/components/PageHeadingsMoreButton';
 
 const { SelectActionBar } = TablePlus.Header;
 
@@ -121,12 +122,54 @@ export default function Home() {
       },
     ];
   }, [refresh]);
-
-  // ColumnVisible
   const { columnVisibleProps, columnsVisible } = useTableColumnVisible({
     columns,
     storageKey: 'record#tableColumnVisibleKeys',
   });
+  const filterProps = useMemo(() => {
+    return {
+      filters: [
+        {
+          name: '短链路径',
+          field: 'key',
+          commands: [EFilterCommand.EQUAL],
+        },
+        {
+          name: '分组',
+          field: 'groupId',
+          commands: [EFilterCommand.EQUAL],
+          form: () => <GroupSelect />,
+          resultValueRender: (val) => groupState.list.find((item) => item.id === val)?.name,
+        },
+      ],
+      value: params[1]?.['$and'] || [],
+      onSubmit: (value) => {
+        field.setValue('$and', [
+          ...(field.getValue<[]>('$and') || []),
+          {
+            [value.field]: {
+              [value.command]: value.value,
+            },
+          },
+        ]);
+        search.submit();
+      },
+      onRemove: (value) => {
+        field.setValue(
+          '$and',
+          (field.getValue<[]>('$and') || []).filter(
+            (item) =>
+              !equal(item, {
+                [value.field]: {
+                  [value.command]: value.value,
+                },
+              }),
+          ),
+        );
+        search.submit();
+      },
+    };
+  }, [field, params, search]);
 
   // Actions
   const handleDeleteMany = useMemoizedFn((keys: Array<string | number>) => {
@@ -154,37 +197,24 @@ export default function Home() {
           title={info?.name}
           desc={`共找到${data?.total}条记录`}
           extra={
-            <>
-              <MenuButton
-                className="mr-2 next-menu-btn-arrow-hidden"
-                style={{
-                  paddingLeft: '4px',
-                  paddingRight: '4px',
-                }}
-                popupProps={{
-                  v2: true,
-                  placement: 'br',
-                }}
-                label={<div className="w-4 h-4 text-gray-500 i-ic-sharp-more-vert" />}
-              >
-                <MenuButton.Item
-                  onClick={() => {
-                    if (groupId === 0) return Message.warning('无法删除默认分组');
-                    deleteConfirm({
-                      onOk: () =>
-                        handleWrapper(() => groupService.Delete({ id: groupId }), {
-                          onSuccess: async () => {
-                            const res = await groupDispatchers.Refresh();
-                            history.push({ pathname: `/record/${res.list[0]}` });
-                          },
-                        }),
+            <PageHeadingsMoreButton>
+              <MenuButton.Item
+                onClick={async () => {
+                  if (groupId === 0) return Message.warning('无法删除默认分组');
+
+                  if (await deleteConfirm()) {
+                    handleWrapper(() => groupService.Delete({ id: groupId }), {
+                      onSuccess: async () => {
+                        const res = await groupDispatchers.Refresh();
+                        history.push({ pathname: `/record/${res.list[0]}` });
+                      },
                     });
-                  }}
-                >
-                  删除
-                </MenuButton.Item>
-              </MenuButton>
-            </>
+                  }
+                }}
+              >
+                删除
+              </MenuButton.Item>
+            </PageHeadingsMoreButton>
           }
           actions={[
             {
@@ -205,48 +235,7 @@ export default function Home() {
       </div>
       <div className="p-4 pt-2 sm:p-6 sm:pt-2">
         <div className="items-center justify-between pb-4 sm:flex">
-          <TableFilter
-            filters={[
-              {
-                name: '短链路径',
-                field: 'key',
-                commands: [EFilterCommand.EQUAL],
-              },
-              {
-                name: '分组',
-                field: 'groupId',
-                commands: [EFilterCommand.EQUAL],
-                form: () => <GroupSelect />,
-                resultValueRender: (val) => groupState.list.find((item) => item.id === val)?.name,
-              },
-            ]}
-            value={params[1]?.['$and'] || []}
-            onSubmit={(value) => {
-              field.setValue('$and', [
-                ...(field.getValue<[]>('$and') || []),
-                {
-                  [value.field]: {
-                    [value.command]: value.value,
-                  },
-                },
-              ]);
-              search.submit();
-            }}
-            onRemove={(value) => {
-              field.setValue(
-                '$and',
-                (field.getValue<[]>('$and') || []).filter(
-                  (item) =>
-                    !equal(item, {
-                      [value.field]: {
-                        [value.command]: value.value,
-                      },
-                    }),
-                ),
-              );
-              search.submit();
-            }}
-          />
+          <TableFilter {...filterProps} />
           <div className="mt-3 sm:mt-0">
             <Select {...columnVisibleProps} />
           </div>

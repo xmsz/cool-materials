@@ -25,14 +25,11 @@ export default ({ columns, storageKey }: { columns: ColumnProps[]; storageKey: s
       className: 'next-no-tag-style',
     };
     return result;
-  }, [columnVisibleKeys, columns]);
-  const columnsVisible = useMemo(
-    () =>
-      columnVisibleKeys
-        ? columns.filter((item) => (item.dataIndex && columnVisibleKeys.includes(item.dataIndex)) || !item.dataIndex)
-        : columns,
-    [columns, columnVisibleKeys],
-  );
+  }, [columnVisibleKeys, columns, setColumnVisibleKeys]);
+  const columnsVisible = useMemo(() => {
+    if (!columnVisibleKeys) return columns;
+    return columns.filter((item) => (item.dataIndex && columnVisibleKeys.includes(item.dataIndex)) || !item.dataIndex);
+  }, [columns, columnVisibleKeys]);
 
   return {
     columnVisibleProps,
