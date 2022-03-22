@@ -19,6 +19,9 @@ export const defaultPropsConfig: {
     v2: true,
     footerActions: ['cancel', 'ok'],
   },
+  Popup: {
+    v2: true,
+  },
   Overlay: {
     v2: true,
   },
