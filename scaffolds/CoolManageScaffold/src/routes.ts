@@ -1,6 +1,7 @@
 import BasicLayout from '@/layouts/BasicLayout';
 import Home from '@/pages/Home';
 import NotFound from '@/pages/NotFound';
+import Record from './layouts/Record';
 
 const routerConfig = [
   {
@@ -8,9 +9,18 @@ const routerConfig = [
     component: BasicLayout,
     children: [
       {
+        path: '/record',
+        component: Record,
+        children: [
+          {
+            path: '/:id',
+            component: Home,
+          },
+        ],
+      },
+      {
         path: '/',
-        exact: true,
-        component: Home,
+        redirect: '/record',
       },
       {
         component: NotFound,

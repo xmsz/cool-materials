@@ -1,8 +1,8 @@
 import useDevice from '@/hooks/useDevice';
 import store from '@/store';
 import { Button, Icon, Nav } from '@alifd/next';
-import { PropsWithChildren, useMemo } from 'react';
-import { useHistory } from 'ice';
+import { PropsWithChildren, useEffect, useMemo } from 'react';
+import { useHistory, useLocation } from 'ice';
 import { GroupFormPopup } from '@/components/GroupForm';
 import compShowApi from '@/libs/compShowApi';
 import useNavMenu from '@/hooks/useNavMenu';
@@ -11,12 +11,19 @@ export default ({ children }: PropsWithChildren<{}>) => {
   const [groupState] = store.useModel('group');
   const device = useDevice();
   const history = useHistory();
+  const location = useLocation();
 
   const menuConfig = useMemo(
     () => groupState.list.map((item) => ({ label: item.name, value: `/record/${item.id}` })),
     [groupState.list],
   );
   const { selectedKeys } = useNavMenu({ menuConfig });
+
+  useEffect(() => {
+    if (location.pathname === '/record') {
+      history.push(`/record/${groupState.list[0].id}`);
+    }
+  }, [location]);
 
   return (
     <div className="sm:flex">
