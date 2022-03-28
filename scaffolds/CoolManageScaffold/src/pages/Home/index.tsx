@@ -14,7 +14,7 @@ import useTableColumnVisible from '@/hooks/useTableColumnVisible';
 import { useMemoizedFn } from 'ahooks';
 import deleteConfirm from '@/libs/deleteConfirm';
 import TableFilter from '@/components/TableFilter';
-import { FilterOperations } from 'mongodb';
+import { Filter } from 'mongodb';
 import equal from 'deep-is';
 import { EFilterCommand } from '@/components/TableFilter/const';
 import { GroupSelect } from '@/components/GroupForm';
@@ -48,7 +48,7 @@ export default function Home() {
     params,
     runAsync: request,
   } = useFusionTablePlus(
-    ({ pageSize, current }, filters?: { $and: Array<FilterOperations<Record<string, unknown>>> }) =>
+    ({ pageSize, current }, filters?: { $and: Array<Filter<Record<string, unknown>>> }) =>
       recordService.Search({ pageSize, page: current - 1, filters, groupId }),
     { field, manual: true },
   );

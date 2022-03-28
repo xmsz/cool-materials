@@ -2,7 +2,7 @@ import { Button, Overlay } from '@alifd/next';
 import { ReactNode, useMemo, useState } from 'react';
 import AddFiltersForm from './AddFiltersForm';
 import { EFilterCommand, FILTER_COMMANDS } from './const';
-import { FilterOperations } from 'mongodb';
+import { Filter } from 'mongodb';
 
 interface IFilterItem {
   command: string;
@@ -23,7 +23,7 @@ export default ({
     form?: () => ReactNode;
     resultValueRender?: (val: any) => ReactNode;
   }>;
-  value: Array<FilterOperations<Record<string, unknown>>>;
+  value: Array<Filter<Record<string, unknown>>>;
   onSubmit: (value: IFilterItem, errors: any, field: any) => void;
   onRemove: (value: IFilterItem) => void;
 }) => {

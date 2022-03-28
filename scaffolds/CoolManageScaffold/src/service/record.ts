@@ -7,7 +7,7 @@ import {
   IRecordUpdateReply,
   IRecordUpdateReq,
 } from '@/interface';
-import { FilterOperations } from 'mongodb';
+import { Filter } from 'mongodb';
 import { request } from 'ice';
 
 const recordService = {
@@ -19,7 +19,7 @@ const recordService = {
   }: {
     pageSize?: number;
     page?: number;
-    filters?: { $and: Array<FilterOperations<Record<string, unknown>>> };
+    filters?: { $and: Array<Filter<Record<string, unknown>>> };
     groupId: number;
   }) {
     let groupId = groupIdFromReq ?? -1;
