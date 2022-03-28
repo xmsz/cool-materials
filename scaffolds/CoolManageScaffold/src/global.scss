@@ -479,6 +479,13 @@ pre {
   position: relative;
   font-weight: 500;
   padding-left: 60px;
+  &.next-drawer-no-title {
+    .next-drawer-close {
+      border-right: 0;
+      top: 24px;
+      color: var(--text-gray-400);
+    }
+  }
 }
 .next-drawer-close {
   border-right: 1px solid var(--bg-gray-200);
@@ -689,6 +696,9 @@ pre {
     --dialog-content-padding-top: 0;
     --dialog-content-padding-left-right: 0;
     --dialog-content-padding-bottom: 0;
+    .next-dialog-body {
+      padding: 0;
+    }
   }
 }
 
