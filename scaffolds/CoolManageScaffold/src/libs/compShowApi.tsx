@@ -1,18 +1,30 @@
 /* eslint-disable @typescript-eslint/indent */
 import { defaultPropsConfig } from '@/layouts/BasicLayout';
 import { ConfigProvider } from '@alifd/next';
-import { useState, ComponentType } from 'react';
+import { useState, ComponentType, useImperativeHandle, forwardRef, Ref } from 'react';
 import ReactDom from 'react-dom';
 import store from '@/store';
 
-const CompWrapper = <T extends { onClose?: () => void }>({
-  Comp,
-  props,
-}: {
-  Comp: ComponentType<T>;
-  props: T & { visible?: boolean; afterClose?: () => void };
-}) => {
+const CompWrapperRaw = <T extends { onClose?: () => void }>(
+  {
+    Comp,
+    props,
+    afterClose,
+  }: {
+    Comp: ComponentType<T>;
+    props: T & { visible?: boolean; afterClose?: () => void };
+    afterClose: () => void;
+  },
+  ref: Ref<{ hide: () => void }>,
+) => {
   const [visible, setVisible] = useState(true);
+
+  useImperativeHandle(ref, () => ({
+    hide: () => {
+      setVisible(false);
+    },
+  }));
+
   return (
     <ConfigProvider
       // @ts-ignore type
@@ -26,11 +38,16 @@ const CompWrapper = <T extends { onClose?: () => void }>({
             setVisible(false);
             props.onClose?.();
           }}
+          afterClose={() => {
+            afterClose();
+            props.afterClose?.();
+          }}
         />
       </store.Provider>
     </ConfigProvider>
   );
 };
+const CompWrapper = forwardRef(CompWrapperRaw);
 
 type ICompShowApi = <T>(
   Comp: ComponentType<T>,
@@ -51,34 +68,26 @@ const compShowApi: ICompShowApi = (Comp, props) => {
 
   document.body.appendChild(container);
 
-  let instance: any;
-  let myRef;
+  let instance: { hide: () => void } | null;
 
   ReactDom.render(
     <CompWrapper
       Comp={Comp}
-      props={{
-        ...props,
-        afterClose: () => {
-          unmount();
-        },
-        ref: (ref) => {
-          myRef = ref;
-        },
+      ref={(ref) => {
+        instance = ref;
+      }}
+      props={props}
+      afterClose={() => {
+        unmount();
       }}
     />,
-
     container,
-    () => {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      instance = myRef;
-    },
+    () => {},
   );
 
   return {
     hide: () => {
-      // TODO
-      // instance?.getInstance()
+      instance?.hide();
     },
   };
 };
