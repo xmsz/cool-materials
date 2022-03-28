@@ -7,7 +7,7 @@ const Between = (paginationProps: PaginationProps) => {
       <Pagination
         {...paginationProps}
         pageSizeSelector="dropdown"
-        pageSizeList={[10, 20, 50]}
+        pageSizeList={[10, 20, 50, 100]}
         className="next-pagination-hide-pages"
       />
 
