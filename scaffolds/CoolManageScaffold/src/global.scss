@@ -102,6 +102,7 @@ pre {
   --card-title-font-weight: bold;
   --card-title-color: var(--color-text1-4);
   --card-sub-title-font-size: 14px;
+  --card-shadow: var(--shadow);
 
   // List
   --list-size-m-item-title-font-weight: 500;
@@ -254,6 +255,30 @@ pre {
   --nav-normal-item-hover-bg-color: transparent;
   --nav-line-item-hover-text-color: var(--text-gray-800);
   --nav-line-item-hover-text-style: 500;
+
+  // List
+  --list-size-s-item-content-font-size: 12px;
+  --list-size-s-item-content-line-height: 16px;
+  --list-size-s-item-padding-tb: 12px;
+}
+
+// List
+.next-list-item-extra {
+  padding-top: 4px;
+}
+.next-list-item-title {
+  width: 100%;
+}
+.next-list-item-title {
+  margin-top: 4px;
+}
+
+// Card
+.next-card-header-title {
+  line-height: 24px;
+}
+.next-card-header-subtitle {
+  margin-top: 4px;
 }
 
 // Nav
@@ -468,6 +493,14 @@ pre {
   box-shadow: rgb(255, 255, 255) 0px 0px 0px 0px, var(--color-brand1-6) 0px 0px 0px 1px,
     rgba(0, 0, 0, 0) 0px 0px 0px 0px;
 }
+.next-date-picker2-wrapper {
+  border-radius: 6px;
+}
+.next-time-picker2-menu-item.next-selected {
+  color: var(--color-brand1-6);
+  background-color: var(--bg-gray-50);
+  font-weight: 500;
+}
 
 // List
 .next-list-item-title {
@@ -479,13 +512,6 @@ pre {
   position: relative;
   font-weight: 500;
   padding-left: 60px;
-  &.next-drawer-no-title {
-    .next-drawer-close {
-      border-right: 0;
-      top: 24px;
-      color: var(--text-gray-400);
-    }
-  }
 }
 .next-drawer-close {
   border-right: 1px solid var(--bg-gray-200);
@@ -506,6 +532,30 @@ pre {
 .next-table-rounded-none {
   --table-header-corner-bottom: 0;
 }
+
+// Table - 拖拽
+.next-table.next-drag {
+  .next-drag-over-up {
+    transform: translate3d(0, -1px, 0);
+    td {
+      border-bottom-color: transparent;
+      border-top: 1px dashed var(--color-brand1-6);
+    }
+  }
+  .next-drag-over-down {
+    td {
+      border-bottom: 1px dashed var(--color-brand1-6);
+      border-top-color: transparent;
+    }
+  }
+  .next-drag-over {
+    td {
+      background: var(--bg-gray-50);
+      transition: background 0.3s ease;
+    }
+  }
+}
+
 // - Table 排序
 .next-table-header-node:not(.next-table-prerow) .next-table-cell-wrapper {
   position: relative;
@@ -696,9 +746,6 @@ pre {
     --dialog-content-padding-top: 0;
     --dialog-content-padding-left-right: 0;
     --dialog-content-padding-bottom: 0;
-    .next-dialog-body {
-      padding: 0;
-    }
   }
 }
 
