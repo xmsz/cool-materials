@@ -293,7 +293,7 @@ pre {
   &.next-line {
     .next-nav-icon.next-icon {
       color: var(--text-gray-400);
-      width: 20px;
+      width: 24px;
       height: 100%;
       display: inline-block;
       vertical-align: middle;
@@ -706,6 +706,9 @@ pre {
   align-items: center;
   justify-content: center;
 }
+.next-btn-text.next-btn-normal {
+  box-shadow: none;
+}
 
 // MenuButton - 不隐藏阴影
 .next-menu-btn {
@@ -746,6 +749,9 @@ pre {
     --dialog-content-padding-top: 0;
     --dialog-content-padding-left-right: 0;
     --dialog-content-padding-bottom: 0;
+    .next-dialog-body {
+      padding: 0;
+    }
   }
 }
 
