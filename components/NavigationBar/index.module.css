@@ -1,0 +1,37 @@
+.NavigationBar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 50;
+  font-size: 32rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.Content {
+  position: relative;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.Title {
+  padding: 0 24rpx;
+}
+
+.TitleCenter {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
+}
+
+.BtnBack {
+  flex-shrink: 0;
+  margin: 0 8rpx;
+  padding: 12rpx;
+  border-radius: 100rpx;
+}
