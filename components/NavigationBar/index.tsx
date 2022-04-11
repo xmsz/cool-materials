@@ -1,4 +1,4 @@
-import { useMount, useWhyDidYouUpdate } from 'ahooks';
+import { useMount } from 'ahooks';
 import { Icon } from '@alifd/meet';
 import { createElement, CSSProperties, RaxNode, useState } from 'rax';
 import { isWeChatMiniProgram } from 'universal-env';
@@ -58,8 +58,6 @@ export default (props: {
         setIsIntersect(res.intersectionRatio === 0);
       });
   });
-
-  useWhyDidYouUpdate('useWhyDidYouUpdateComponent', props);
 
   return (
     <>
