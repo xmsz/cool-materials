@@ -1,22 +1,13 @@
-import { useMount } from 'ahooks';
+import { useMount, useWhyDidYouUpdate } from 'ahooks';
 import { Icon } from '@alifd/meet';
 import { createElement, CSSProperties, RaxNode, useState } from 'rax';
 import { isWeChatMiniProgram } from 'universal-env';
 
 import styles from './index.module.css';
 import { INavigationBarInfo, initNavigationInfo } from './navigationBar';
+import { intersectionObserver } from '@uni/apis';
 
-export default ({
-  onBack,
-  backProps,
-  back = true,
-  placeholder = true,
-  title,
-  brightness = 'light',
-  titleAlign = 'center',
-  background,
-  content,
-}: {
+export default (props: {
   placeholder?: boolean;
   back?: boolean;
   onBack?: () => void;
@@ -26,12 +17,26 @@ export default ({
   titleAlign?: 'left' | 'center' | 'right';
   background?: string;
   content?: string | RaxNode;
+  intersectBackground?: string;
 }) => {
+  const {
+    onBack,
+    backProps,
+    back = true,
+    placeholder = true,
+    title,
+    brightness = 'light',
+    titleAlign = 'center',
+    background = 'transparent',
+    content,
+    intersectBackground = background,
+  } = props;
   const [data, setData] = useState<INavigationBarInfo>({
     navigationBarHeight: 64,
     statusBarHeight: 20,
     capsulePosition: { bottom: 0, height: 0, left: 0, right: 0, top: 0, width: 0 },
   });
+  const [isIntersect, setIsIntersect] = useState(false);
 
   useMount(async () => {
     if (isWeChatMiniProgram) {
@@ -40,6 +45,22 @@ export default ({
     }
   });
 
+  useMount(() => {
+    const observer = intersectionObserver({
+      thresholds: [0],
+    });
+
+    observer
+      .relativeToViewport({
+        bottom: 0,
+      })
+      .observe('.navigation-bar-placeholder', (res) => {
+        setIsIntersect(res.intersectionRatio === 0);
+      });
+  });
+
+  useWhyDidYouUpdate('useWhyDidYouUpdateComponent', props);
+
   return (
     <>
       {placeholder && (
@@ -47,6 +68,7 @@ export default ({
           style={{
             height: `${data.navigationBarHeight}px`,
           }}
+          className="navigation-bar-placeholder"
         />
       )}
 
@@ -56,7 +78,7 @@ export default ({
         }`}
         style={{
           height: `${data.navigationBarHeight}px`,
-          background,
+          background: isIntersect ? intersectBackground : background,
         }}
       >
         <div
