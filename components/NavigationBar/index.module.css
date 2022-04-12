@@ -35,3 +35,7 @@
   padding: 12rpx;
   border-radius: 100rpx;
 }
+
+.NavigationBarDark .BtnBack {
+  color: #fff;
+}
