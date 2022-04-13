@@ -3,7 +3,11 @@ import { Message } from '@alifd/next';
 
 export default async <T>(
   handler: () => Promise<T>,
-  { successText, onSuccess }: { successText?: string; onSuccess?: (res: T) => void } = {},
+  {
+    successText,
+    onSuccess,
+    onFinally,
+  }: { successText?: string; onSuccess?: (res: T) => void; onFinally?: () => void } = {},
 ) => {
   try {
     Message.loading({ title: '处理中' });
@@ -17,6 +21,6 @@ export default async <T>(
     Message.hide();
     showErrMessage(err);
   } finally {
-    //
+    onFinally?.();
   }
 };
