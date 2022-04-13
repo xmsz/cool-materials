@@ -1,6 +1,6 @@
 import { useMount } from 'ahooks';
 import { Icon } from '@alifd/meet';
-import { createElement, CSSProperties, RaxNode, useState } from 'rax';
+import { createElement, CSSProperties, RaxNode, useEffect, useRef, useState } from 'rax';
 import { isWeChatMiniProgram } from 'universal-env';
 
 import styles from './index.module.css';
@@ -37,6 +37,11 @@ export default (props: {
     capsulePosition: { bottom: 0, height: 0, left: 0, right: 0, top: 0, width: 0 },
   });
   const [isIntersect, setIsIntersect] = useState(false);
+  const observer = useRef(
+    intersectionObserver({
+      thresholds: [0],
+    }),
+  );
 
   useMount(async () => {
     if (isWeChatMiniProgram) {
@@ -45,19 +50,18 @@ export default (props: {
     }
   });
 
-  useMount(() => {
-    const observer = intersectionObserver({
-      thresholds: [0],
-    });
-
-    observer
-      .relativeToViewport({
-        bottom: 0,
-      })
-      .observe('.navigation-bar-placeholder', (res) => {
-        setIsIntersect(res.intersectionRatio === 0);
-      });
-  });
+  useEffect(() => {
+    observer.current.disconnect();
+    if (placeholder) {
+      observer.current
+        .relativeToViewport({
+          bottom: 0,
+        })
+        .observe('.navigation-bar-placeholder', (res) => {
+          setIsIntersect(res.intersectionRatio === 0);
+        });
+    }
+  }, [placeholder]);
 
   return (
     <>
