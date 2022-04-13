@@ -97,7 +97,7 @@ export default (props: {
 
             <b
               className={`${styles.Title} ${titleAlign === 'center' && styles.TitleCenter}`}
-              style={{ textAlign: titleAlign }}
+              style={{ textAlign: titleAlign, fontWeight: 500 }}
             >
               {title}
             </b>
