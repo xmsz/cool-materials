@@ -18,6 +18,7 @@ export default (props: {
   background?: string;
   content?: string | RaxNode;
   intersectBackground?: string;
+  placeholderClassName?: string;
 }) => {
   const {
     onBack,
@@ -30,6 +31,7 @@ export default (props: {
     background = 'transparent',
     content,
     intersectBackground = background,
+    placeholderClassName,
   } = props;
   const [data, setData] = useState<INavigationBarInfo>({
     navigationBarHeight: 64,
@@ -70,7 +72,7 @@ export default (props: {
           style={{
             height: `${data.navigationBarHeight}px`,
           }}
-          className="navigation-bar-placeholder"
+          className={`navigation-bar-placeholder ${placeholderClassName}`}
         />
       )}
 
