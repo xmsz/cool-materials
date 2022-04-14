@@ -1,17 +1,18 @@
 import showErrMessage from './showErrMessage';
 import { Message } from '@alifd/next';
 
-export default async <T>(
-  handler: () => Promise<T>,
+export default async <T, PAYLOAD>(
+  handler: (payload?: PAYLOAD) => Promise<T>,
   {
     successText,
+    payload,
     onSuccess,
     onFinally,
-  }: { successText?: string; onSuccess?: (res: T) => void; onFinally?: () => void } = {},
+  }: { successText?: string; payload?: PAYLOAD; onSuccess?: (res: T) => void; onFinally?: () => void } = {},
 ) => {
   try {
     Message.loading({ title: '处理中' });
-    const res = await handler();
+    const res = await handler(payload);
     Message.success({
       title: successText ?? '操作成功',
     });
