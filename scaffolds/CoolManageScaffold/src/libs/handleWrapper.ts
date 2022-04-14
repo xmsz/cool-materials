@@ -13,6 +13,7 @@ export default async <T, PAYLOAD>(
   try {
     Message.loading({ title: '处理中' });
     const res = await handler(payload);
+    Message.hide();
     Message.success({
       title: successText ?? '操作成功',
     });
