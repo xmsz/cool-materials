@@ -22,7 +22,7 @@ const appConfig: IAppConfig = {
         onConfig: (config) => {
           const nextConfig = { ...config };
           if (!nextConfig.headers) nextConfig.headers = {};
-          nextConfig.headers.Authorization = `Bearer ${auth.getToken()}`;
+          nextConfig.headers.Authorization = `Bearer ${auth.token}`;
 
           return nextConfig;
         },
