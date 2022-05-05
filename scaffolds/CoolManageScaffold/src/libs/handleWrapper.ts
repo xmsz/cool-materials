@@ -8,7 +8,14 @@ export default async <T, PAYLOAD>(
     payload,
     onSuccess,
     onFinally,
-  }: { successText?: string | boolean; payload?: PAYLOAD; onSuccess?: (res: T) => void; onFinally?: () => void } = {},
+    onError,
+  }: {
+    successText?: string | boolean;
+    payload?: PAYLOAD;
+    onSuccess?: (res: T) => void;
+    onFinally?: () => void;
+    onError?: (err: any) => void;
+  } = {},
 ) => {
   try {
     Message.loading({ title: '处理中' });
@@ -24,6 +31,7 @@ export default async <T, PAYLOAD>(
 
     onSuccess?.(res);
   } catch (err) {
+    onError?.(err);
     Message.hide();
     showErrMessage(err);
   } finally {
