@@ -42,6 +42,13 @@ pre {
 @import '@alifd/theme-react/variables.css';
 @import '@alifd/theme-react/dist/next.var.css';
 
+// 忘记替换
+:root {
+  --drawer-close-size: 16px;
+  --balloon-tooltip-border-width: 0px;
+  --input-hover-border-color: var(--input-border-color);
+}
+
 // 暂时无法替换
 :root {
   // Popup
@@ -621,6 +628,9 @@ pre {
       }
     }
   }
+}
+.next-balloon-tooltip-top-right .next-balloon-arrow {
+  transform: translate(0, 1px);
 }
 
 // Checkbox
