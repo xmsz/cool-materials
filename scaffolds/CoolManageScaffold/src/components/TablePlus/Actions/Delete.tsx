@@ -35,7 +35,7 @@ export default ({
         }}
         {...messageProps}
       />
-      <div className="flex justify-end gap-2 mt-3">
+      <div className="flex justify-end gap-2 mt-4">
         <Button
           size="small"
           onClick={() => {
