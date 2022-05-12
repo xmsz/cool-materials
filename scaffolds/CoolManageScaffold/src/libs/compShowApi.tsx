@@ -1,9 +1,10 @@
 /* eslint-disable @typescript-eslint/indent */
-import { defaultPropsConfig } from '@/layouts/BasicLayout';
+
 import { ConfigProvider } from '@alifd/next';
 import { useState, ComponentType, useImperativeHandle, forwardRef, Ref } from 'react';
 import ReactDom from 'react-dom';
 import store from '@/store';
+import { ConfigProvideConfig } from '@/configs/ConfigProvider';
 
 const CompWrapperRaw = <T extends { onClose?: () => void }>(
   {
@@ -28,7 +29,7 @@ const CompWrapperRaw = <T extends { onClose?: () => void }>(
   return (
     <ConfigProvider
       // @ts-ignore type
-      defaultPropsConfig={defaultPropsConfig}
+      defaultPropsConfig={ConfigProvideConfig}
     >
       <store.Provider>
         <Comp

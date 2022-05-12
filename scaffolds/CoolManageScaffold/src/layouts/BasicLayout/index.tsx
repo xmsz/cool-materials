@@ -1,34 +1,10 @@
 import { PropsWithChildren, useMemo } from 'react';
 import { Shell, ConfigProvider, Nav } from '@alifd/next';
-import { DialogProps } from '@alifd/next/types/dialog';
-import { PopupProps, OverlayProps } from '@alifd/next/types/overlay';
-import { TooltipProps } from '@alifd/next/types/balloon';
 import { useLocalStorageState } from 'ahooks';
 import useDevice from '@/hooks/useDevice';
 import useNavMenu from '@/hooks/useNavMenu';
 import { useHistory } from 'ice';
-
-export const defaultPropsConfig: {
-  Dialog: DialogProps;
-  Popup?: PopupProps;
-  Overlay: OverlayProps;
-  Tooltip: TooltipProps;
-} = {
-  Dialog: {
-    animation: { in: 'zoomIn', out: 'zoomOut' },
-    v2: true,
-    footerActions: ['cancel', 'ok'],
-  },
-  // Popup: {
-  //   v2: true,
-  // },
-  Overlay: {
-    v2: true,
-  },
-  Tooltip: {
-    v2: true,
-  },
-};
+import { ConfigProvideConfig } from '@/configs/ConfigProvider';
 
 export default ({ children }: PropsWithChildren<{}>) => {
   const [navCollapse, setNavCollapse] = useLocalStorageState('BasicLayout#NavCollapse', {
@@ -50,7 +26,7 @@ export default ({ children }: PropsWithChildren<{}>) => {
   return (
     <ConfigProvider
       // @ts-ignore type
-      defaultPropsConfig={defaultPropsConfig}
+      defaultPropsConfig={ConfigProvideConfig}
     >
       <Shell className="min-h-screen" device={device}>
         <Shell.Navigation
