@@ -1,21 +1,16 @@
 import { Button, Overlay } from '@alifd/next';
-import { ReactNode, useMemo, useState } from 'react';
+import React, { ReactNode, useMemo, useState } from 'react';
 import AddFiltersForm from './AddFiltersForm';
 import { EFilterCommand, FILTER_COMMANDS } from './const';
 import { Filter } from 'mongodb';
 
-interface IFilterItem {
+export interface IFilterItem<Field = string> {
   command: string;
   value: any;
-  field: string;
+  field: Field;
 }
 
-export default ({
-  filters,
-  value,
-  onSubmit,
-  onRemove,
-}: {
+export interface ITableFilterProps<Field = string> {
   filters: Array<{
     name: string;
     field: string;
@@ -24,16 +19,18 @@ export default ({
     resultValueRender?: (val: any) => ReactNode;
   }>;
   value: Array<Filter<Record<string, unknown>>>;
-  onSubmit: (value: IFilterItem, errors: any, field: any) => void;
-  onRemove: (value: IFilterItem) => void;
-}) => {
+  onSubmit: (value: IFilterItem<Field>, errors: any, field: any) => void;
+  onRemove: (value: IFilterItem<Field>) => void;
+}
+
+export default ({ filters, value: curValue, onSubmit, onRemove }: ITableFilterProps) => {
   const [visible, setVisible] = useState(false);
 
   const filterList = useMemo(() => {
-    if (!value) return [];
-    const result: Array<IFilterItem> = [];
+    if (!curValue) return [];
+    const result: IFilterItem[] = [];
 
-    value.forEach((item) => {
+    curValue.forEach((item) => {
       const field = Object.keys(item)[0];
       if (!item[field]) return;
       const command = Object.keys(item[field]!)[0];
@@ -43,7 +40,7 @@ export default ({
     });
 
     return result;
-  }, [value]);
+  }, [curValue]);
 
   return (
     <div className="items-center flex flex-wrap">
@@ -76,10 +73,11 @@ export default ({
       <div className="flex gap-2 mt-2 flex-wrap sm:ml-2 sm:mt-0">
         {filterList.map((item, itemIdx) => {
           const { field, command, value } = item;
-          const filterItem = filters.find((item) => item.field === field);
-          const commandItem = FILTER_COMMANDS.find((item) => item.value === command);
+          const filterItem = filters.find((childItem) => childItem.field === field);
+          const commandItem = FILTER_COMMANDS.find((childItem) => childItem.value === command);
           return (
             <div
+              // eslint-disable-next-line react/no-array-index-key
               key={`${field}-${itemIdx}`}
               className="flex items-center border border-indigo-200 bg-indigo-50 rounded text-indigo-800 font-medium py-2 px-3"
             >
