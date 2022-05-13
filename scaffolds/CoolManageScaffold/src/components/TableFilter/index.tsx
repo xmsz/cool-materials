@@ -10,6 +10,11 @@ export interface IFilterItem<Field = string> {
   field: Field;
 }
 
+export type ITableFilters = Array<{
+  [field: string]: {
+    [command: string]: any;
+  };
+}>;
 export interface ITableFilterProps<Field = string> {
   filters: Array<{
     name: string;
