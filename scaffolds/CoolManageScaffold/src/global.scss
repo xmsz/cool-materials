@@ -42,13 +42,6 @@ pre {
 @import '@alifd/theme-react/variables.css';
 @import '@alifd/theme-react/dist/next.var.css';
 
-// 忘记替换
-:root {
-  --drawer-close-size: 16px;
-  --balloon-tooltip-border-width: 0px;
-  --input-hover-border-color: var(--input-border-color);
-}
-
 // 暂时无法替换
 :root {
   // Popup
@@ -95,6 +88,7 @@ pre {
   --bg-gray-50: rgba(249, 250, 251, var(--un-bg-opacity, 1));
   --bg-gray-100: rgba(243, 244, 246, var(--un-bg-opacity, 1));
   --bg-gray-200: rgba(229, 231, 235, var(--un-bg-opacity, 1));
+  --bg-gray-900: rgba(17, 24, 39, var(--un-bg-opacity, 1));
   --shadow-xl: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 20px 25px -5px,
     rgba(0, 0, 0, 0.1) 0px 8px 10px -6px;
   --shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
@@ -104,6 +98,20 @@ pre {
   --shadow-sm: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
   --border-gray-200: rgba(229, 231, 235, var(--un-border-opacity, 1));
   --border-gray-300: rgba(209, 213, 219, var(--un-border-opacity, 1));
+}
+
+// 忘记替换
+:root {
+  --drawer-close-size: 16px;
+  --balloon-tooltip-border-width: 0px;
+  --input-hover-border-color: var(--input-border-color);
+  --balloon-tooltip-color: var(--text-gray-900);
+  --balloon-tooltip-size-padding-top: 8px;
+  --balloon-tooltip-size-padding-left: 12px;
+  --balloon-tooltip-size-padding-bottom: 8px;
+  --balloon-tooltip-size-padding-right: 12px;
+  --balloon-tooltip-content-font-size: 13px;
+  --balloon-size-arrow-size: 8px;
 }
 
 // List
@@ -616,17 +624,15 @@ pre {
 
 // Tooltip
 .next-balloon-tooltip {
-  // 亮色主题
-  &.next-light {
-    --balloon-tooltip-color-bg: #fff;
-    --balloon-tooltip-color: var(--text-gray-900);
-
-    .next-balloon-arrow {
-      height: 23px;
-      .next-balloon-arrow-content {
-        box-shadow: var(--popup-local-shadow);
-      }
+  .next-balloon-arrow {
+    .next-balloon-arrow-content {
+      box-shadow: var(--popup-local-shadow);
     }
+  }
+  // 暗色主题
+  &.next-dark {
+    --balloon-tooltip-color-bg: var(--bg-gray-900);
+    --balloon-tooltip-color: #fff;
   }
 }
 .next-balloon-tooltip-top-right .next-balloon-arrow {
@@ -693,9 +699,4 @@ pre {
 }
 .col-span-1 {
   grid-column: span 1 / span 1;
-}
-
-// Icon
-.next-icon-list-alt {
-  @apply i-ic-sharp-list-alt;
 }
