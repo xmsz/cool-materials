@@ -119,6 +119,7 @@ pre {
   --pagination-item-current-shadow: none;
   --pagination-item-shadow: none;
   --pagination-item-current-hover-shadow: none;
+  --shell-brand-content-background: #f9fafb;
 }
 
 // List
@@ -172,6 +173,11 @@ pre {
       }
     }
   }
+}
+
+// Cascader
+.next-cascader-menu-icon-right {
+  top: 9px;
 }
 
 // Select
