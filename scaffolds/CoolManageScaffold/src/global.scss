@@ -67,6 +67,9 @@ pre {
 
   // Tooltip
   --balloon-tooltip-shadow: var(--popup-local-shadow);
+
+  // Ballon
+  --balloon-normal-shadow: var(--popup-local-shadow);
 }
 
 :root {
@@ -104,6 +107,7 @@ pre {
 :root {
   --drawer-close-size: 16px;
   --balloon-tooltip-border-width: 0px;
+  --balloon-normal-border-width: 0px;
   --input-hover-border-color: var(--input-border-color);
   --balloon-tooltip-color: var(--text-gray-900);
   --balloon-tooltip-size-padding-top: 8px;
@@ -112,6 +116,9 @@ pre {
   --balloon-tooltip-size-padding-right: 12px;
   --balloon-tooltip-content-font-size: 13px;
   --balloon-size-arrow-size: 8px;
+  --pagination-item-current-shadow: none;
+  --pagination-item-shadow: none;
+  --pagination-item-current-hover-shadow: none;
 }
 
 // List
@@ -639,6 +646,14 @@ pre {
   transform: translate(0, 1px);
 }
 
+// Ballon
+.next-balloon-normal.next-balloon-top:after,
+.next-balloon-normal.next-balloon-top-right:after {
+  border-left: 1px solid #e7e8e9;
+  border-top: 1px solid #e7e8e9;
+  margin-top: -1px;
+}
+
 // Checkbox
 .next-checkbox-wrapper {
   .next-checkbox-inner > .next-icon {
@@ -650,6 +665,17 @@ pre {
 .page-padding-x {
   padding-left: 24px;
   padding-right: 24px;
+}
+
+// Upload
+.next-upload-card {
+  border-radius: 8px;
+}
+.next-upload-list-card .next-upload-list-item-wrapper {
+  border-radius: 8px;
+}
+.next-upload-list-card .next-upload-list-item-thumbnail img {
+  border-radius: 8px;
 }
 
 // 移动端
