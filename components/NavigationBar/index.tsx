@@ -86,6 +86,7 @@ export default (props: {
         }}
       >
         <div
+          className="cool-navigation-bar-status-bar"
           style={{
             flexShrink: 0,
             height: `${data.statusBarHeight}px`,
