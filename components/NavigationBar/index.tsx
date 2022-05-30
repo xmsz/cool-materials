@@ -56,7 +56,7 @@ export default (props: {
 
   useEffect(() => {
     observer.current.disconnect();
-    if (placeholder) {
+    if (placeholder && fixed) {
       observer.current
         .relativeToViewport({
           bottom: 0,
@@ -65,7 +65,7 @@ export default (props: {
           setIsIntersect(res.intersectionRatio === 0);
         });
     }
-  }, [placeholder]);
+  }, [fixed, placeholder]);
 
   return (
     <>
