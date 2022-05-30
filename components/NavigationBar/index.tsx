@@ -19,6 +19,7 @@ export default (props: {
   content?: string | RaxNode;
   intersectBackground?: string;
   placeholderClassName?: string;
+  fixed?: boolean;
 }) => {
   const {
     onBack,
@@ -32,6 +33,7 @@ export default (props: {
     content,
     intersectBackground = background,
     placeholderClassName,
+    fixed = true,
   } = props;
   const [data, setData] = useState<INavigationBarInfo>({
     navigationBarHeight: 64,
@@ -67,7 +69,7 @@ export default (props: {
 
   return (
     <>
-      {placeholder && (
+      {placeholder && fixed && (
         <div
           style={{
             height: `${data.navigationBarHeight}px`,
@@ -83,6 +85,7 @@ export default (props: {
         style={{
           height: `${data.navigationBarHeight}px`,
           background: isIntersect ? intersectBackground : background,
+          position: fixed ? 'fixed' : 'relative',
         }}
       >
         <div
