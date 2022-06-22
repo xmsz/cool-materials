@@ -2,8 +2,7 @@ import axios from 'axios';
 import queryString from 'query-string';
 import { getStorageSync, setStorageSync, removeStorageSync } from '@uni/storage';
 import { getEnv } from './env';
-import { getAppId } from '@/config';
-import { getSearchParams } from 'rax-app';
+import { getAppId } from '../config';
 
 const ACCESS_TOKEN_KEY = 'access_token';
 
@@ -44,7 +43,7 @@ const getParams = () => {
 
 export class Auth {
   env = getEnv();
-  appId: string;
+  appId = '';
 
   init({ appId }: { appId: string }) {
     this.appId = appId;
@@ -75,7 +74,12 @@ export class Auth {
     let accessToken = '';
 
     const getHandler = () => {
-      const handers = [{ reg: () => this.env === 'wechat-web', handler: () => this.wechatWebLogin() }];
+      const handers = [
+        {
+          reg: () => this.env === 'wechat-web',
+          handler: () => this.wechatWebLogin(),
+        },
+      ];
       return handers.find((item) => item.reg())?.handler;
     };
 
@@ -106,7 +110,6 @@ export class Auth {
       env: this.env,
       inviteCode,
       officialAppId: appId,
-      theme: String(getSearchParams()['theme']),
     });
 
     return { accessToken: res.data.data.token };
@@ -124,7 +127,7 @@ export class Auth {
       try {
         const res = await this.requestLogin(code);
         return res.accessToken;
-      } catch (err) {
+      } catch (err: any) {
         // 40163: code been used || 40029: invalid code 【危险 可能造成无限循环】
         if (err.code === 40163 || err.code === 40029) {
           // CANDO: 避免疯狂调整
