@@ -1,0 +1,152 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+@import '@alifd/meet/es/core/index.css';
+@import './assets/round.css';
+
+html {
+  line-height: 1.5;
+}
+[type='button'],
+[type='reset'],
+[type='submit'],
+button {
+  -webkit-appearance: button;
+  background-color: transparent;
+  background-image: none;
+}
+
+* {
+  border-width: 0;
+}
+
+blockquote,
+dd,
+dl,
+figure,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+hr,
+p,
+pre {
+  margin: 0;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans,
+    sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+  color: rgb(17, 24, 39);
+  padding: 0;
+  margin: 0;
+}
+
+@font-face {
+  font-family: 'Avenir';
+  src: url('https://groupon-cdn.cpshelp.cn/font/AvenirLTStd-Roman.otf');
+}
+
+.num {
+  font-family: 'Avenir';
+}
+
+.mt-button {
+  font-weight: bold;
+}
+
+.mt-dialog-container--centered {
+  background: #f8f9fb;
+  border-top-left-radius: 24rpx;
+  border-top-right-radius: 24rpx;
+}
+
+.mt-dialog-title {
+  font-weight: bold;
+}
+
+.mt-selectdrawer-toolbar-btn-cancel {
+  font-weight: normal;
+}
+
+.mt-selectdrawer-toolbar {
+  border: none !important;
+}
+
+.truncate-line-2 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+:root {
+  --p-body-1-font-size: 24rpx;
+  --box-small-padding-hoz: 12rpx;
+  --box-small-padding-ver: 12rpx;
+  --box-small-border-radius: 999rpx;
+
+  --p-body-2-font-size: 28rpx;
+  --box-medium-border-radius: 999rpx;
+  --box-medium-padding-hoz: 24rpx;
+  --box-medium-padding-ver: 24rpx;
+
+  --p-body-3-font-size: 32rpx;
+  --box-large-border-radius: 999rpx;
+  --box-large-padding-hoz: 32rpx;
+  --box-large-padding-ver: 32rpx;
+  --box-large-border-radius: 20rpx;
+
+  --color-brand-3: #f24d0c;
+  --color-brand-4: #f2270c;
+
+  // --color-brand-3: #000;
+  // --color-brand-4: #000;
+  // --box-primary-solid-font-color: #ceed39;
+
+  --p-title-font-size: 34rpx;
+  --p-subhead-font-size: 30rpx;
+
+  --color-fill1-1: #f9fafb;
+  --color-line1-3: #b82e2d;
+
+  --dialog-title-font-size: 32rpx;
+}
+
+* {
+  --dialog-centered-border-color: transparent;
+  --dialog-divider-width: 0;
+  --dialog-centered-title-margin-top: 8rpx;
+
+  --list-divider-border-bottom-color: var(--color-fill1-2);
+
+  --drawer-content-corner: 20rpx;
+  --dialog-corner: 20rpx;
+  --action-sheet-corner: 20rpx;
+
+  --search-corner: 999px;
+}
+
+.text-price {
+  color: #f2270c;
+}
+
+.price {
+  color: #d9473f;
+  font-size: 24rpx;
+  display: block;
+  font-family: 'Avenir';
+  .num {
+    font-size: 28rpx;
+  }
+}
+
+.safe-pb {
+  padding-bottom: 0; /* 无小黑条的情况下，无需额外设置  */
+  padding-bottom: constant(safe-area-inset-bottom); /* 兼容  iOS < 11.2 */
+  padding-bottom: env(safe-area-inset-bottom); // /* iOS > 11.2 */
+}
