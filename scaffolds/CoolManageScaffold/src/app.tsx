@@ -1,18 +1,22 @@
 import { runApp, IAppConfig } from 'ice';
 import 'uno.css';
 import auth from './libs/auth';
-import groupService from './service/group';
+import { IRootState } from './store';
 
 const appConfig: IAppConfig = {
   app: {
     rootId: 'ice-container',
     getInitialData: async (ctx) => {
-      const group = await groupService.Search();
+      const initialStates: Partial<IRootState> = {};
+      // try {
+      //   const official = await officialService.Find();
+      //   initialStates.official = official;
+      // } catch (err) {
+      //   console.error(err);
+      // }
 
       return {
-        initialStates: {
-          group,
-        },
+        initialStates,
       };
     },
   },
@@ -25,6 +29,19 @@ const appConfig: IAppConfig = {
           nextConfig.headers.Authorization = `Bearer ${auth.token}`;
 
           return nextConfig;
+        },
+      },
+      response: {
+        onError: (error) => {
+          if (error.response) {
+            switch (error.response.status) {
+              case 401:
+                // emitter.emit('unauthorized');
+                break;
+              default:
+            }
+          }
+          return Promise.reject(error['response']?.data || error);
         },
       },
     },
