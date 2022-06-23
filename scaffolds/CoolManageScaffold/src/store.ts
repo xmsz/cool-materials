@@ -1,12 +1,12 @@
 import { createStore, IStoreModels, IStoreDispatch, IStoreRootState } from 'ice';
-import group from './models/group';
+import user from './models/user';
 
 interface IAppStoreModels extends IStoreModels {
-  group: typeof group;
+  user: typeof user;
 }
 
 const appModels: IAppStoreModels = {
-  group,
+  user,
 };
 
 const store = createStore(appModels);
