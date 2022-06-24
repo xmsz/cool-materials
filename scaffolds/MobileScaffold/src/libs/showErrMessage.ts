@@ -1,5 +1,7 @@
-import { Message } from '@alifd/meet';
+import { showToast } from '@uni/toast';
 
 export default (err: any) => {
-  Message.notice({ content: err.response?.data?.message || err.message || err.errMsg || err });
+  const content = err.response?.data?.message || err.message || err.errMsg || err;
+  showToast({ content, type: 'fail' });
+  return content;
 };

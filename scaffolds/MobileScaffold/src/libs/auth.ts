@@ -2,7 +2,11 @@ import axios from 'axios';
 import queryString from 'query-string';
 import { getStorageSync, setStorageSync, removeStorageSync } from '@uni/storage';
 import { getEnv } from './env';
-import { getAppId } from '../config';
+
+interface AuthWechatConfig {
+  scope?: 'snsapi_userinfo' | 'snsapi_base';
+  componentAppid?: string;
+}
 
 const ACCESS_TOKEN_KEY = 'access_token';
 
@@ -12,26 +16,29 @@ request.interceptors.response.use(
   (error) => Promise.reject(error.response?.data ?? error),
 );
 
-function generateWechatAuthLink({ appId }: { appId: string }) {
+function generateWechatAuthLink({
+  appId,
+  scope = 'snsapi_base',
+  componentAppid,
+}: {
+  appId: string;
+  scope?: 'snsapi_userinfo' | 'snsapi_base';
+  componentAppid?: string;
+}) {
   const url = new URL(location.href);
 
   // STEP: 去除code和state
-  const parsed = queryString.parse(url.search);
-  delete parsed.code;
-  delete parsed.state;
-  const stringified = queryString.stringify(parsed);
-  url.search = stringified;
+  const { code, state, ...parsed } = queryString.parse(url.search);
+  url.search = queryString.stringify(parsed);
 
-  const queryStringified = queryString.stringify({
+  return `https://open.weixin.qq.com/connect/oauth2/authorize?${queryString.stringify({
     appid: appId,
+    scope,
     redirect_uri: decodeURIComponent(url.href),
     response_type: 'code',
-    scope: 'snsapi_userinfo',
     state: '',
-  });
-  const jumpUrl = `https://open.weixin.qq.com/connect/oauth2/authorize?${queryStringified}#wechat_redirect`;
-
-  return jumpUrl;
+    ...(componentAppid ? { component_appid: componentAppid } : {}),
+  })}#wechat_redirect`;
 }
 
 const getParams = () => {
@@ -44,29 +51,42 @@ const getParams = () => {
 export class Auth {
   env = getEnv();
   appId = '';
+  storageKey = ACCESS_TOKEN_KEY;
+  wechatConfig: AuthWechatConfig = {};
 
-  init({ appId }: { appId: string }) {
+  constructor({
+    appId,
+    storageKey,
+    wechatConfig,
+  }: {
+    appId: string;
+    storageKey?: string;
+    wechatConfig?: AuthWechatConfig;
+  }) {
     this.appId = appId;
+
+    if (storageKey) this.storageKey = storageKey;
+    if (wechatConfig) this.wechatConfig = wechatConfig;
   }
 
   // CANDO: 可以缓存一下，避免每次都从storage拿
   getAccessToken() {
     const { data: accessToken } = getStorageSync({
-      key: ACCESS_TOKEN_KEY,
+      key: this.storageKey,
     });
     return accessToken;
   }
 
   setAccessToken(accessToken: string) {
     setStorageSync({
-      key: ACCESS_TOKEN_KEY,
+      key: this.storageKey,
       data: accessToken,
     });
   }
 
   removeAccessToken() {
     removeStorageSync({
-      key: ACCESS_TOKEN_KEY,
+      key: this.storageKey,
     });
   }
 
@@ -94,9 +114,11 @@ export class Auth {
 
     // STEP: 储存在本地
     if (accessToken) this.setAccessToken(accessToken);
+
+    return accessToken;
   }
 
-  private async requestLogin(code: string) {
+  public async requestLogin(code: string) {
     const urlParams = getParams();
     const { invite_code: inviteCode } = urlParams;
     const { appId } = this;
@@ -121,7 +143,10 @@ export class Auth {
     const code = codeFromParams && typeof codeFromParams === 'object' ? codeFromParams[0] : codeFromParams;
 
     const jumpToWechatAuth = () => {
-      window.location.href = generateWechatAuthLink({ appId: this.appId });
+      window.location.href = generateWechatAuthLink({
+        appId: this.appId,
+        ...this.wechatConfig,
+      });
     };
     if (code) {
       try {
@@ -145,11 +170,3 @@ export class Auth {
     return '';
   }
 }
-
-const auth = new Auth();
-
-auth.init({
-  appId: getAppId(),
-});
-
-export default auth;
