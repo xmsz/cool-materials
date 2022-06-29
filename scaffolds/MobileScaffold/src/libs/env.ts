@@ -24,4 +24,5 @@ export const getEnv = () => {
 
 export const isFeature = () => urlParams.get('feature');
 
+// @ts-ignore process node type
 export const isDev = process.env.NODE_ENV === 'development';
