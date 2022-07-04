@@ -570,7 +570,9 @@ pre {
 
 // MenuButton - 不隐藏阴影
 .next-menu-btn {
-  box-shadow: var(--btn-shadow);
+  &:not(.next-btn-text) {
+    box-shadow: var(--btn-shadow);
+  }
 
   // 隐藏的箭头
   &.next-menu-btn-arrow-hidden {
