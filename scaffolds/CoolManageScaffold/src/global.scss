@@ -680,6 +680,11 @@ pre {
     margin-top: 0;
   }
 }
+.next-checkbox-label-overflow-hidden {
+  .next-checkbox-label {
+    overflow: hidden;
+  }
+}
 
 // Layout
 .page-padding-x {
