@@ -54,7 +54,7 @@ pre {
   --pagination-item-border-width: 0px;
 
   // Menu
-  --menu-line-height: 24px;
+  --menu-line-height: 20px;
 
   // Card
   --card-shadow: var(--shadow);
@@ -560,6 +560,7 @@ pre {
   .next-menu-item {
     .next-menu-item-inner {
       overflow: visible;
+      height: auto;
     }
   }
 }
