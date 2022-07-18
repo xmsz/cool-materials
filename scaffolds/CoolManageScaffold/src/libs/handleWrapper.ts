@@ -18,7 +18,7 @@ export default async <T, PAYLOAD>(
   } = {},
 ) => {
   try {
-    Message.loading({ title: '处理中' });
+    Message.loading({ title: '处理中', duration: 1000 * 30 });
     const res = await handler(payload);
 
     Message.hide();
