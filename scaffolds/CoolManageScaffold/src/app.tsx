@@ -2,10 +2,22 @@ import { runApp, IAppConfig } from 'ice';
 import 'uno.css';
 import auth from './libs/auth';
 import { IRootState } from './store';
+import { ConfigProvideConfig } from './config';
+import { ConfigProvider } from '@alifd/next';
 
 const appConfig: IAppConfig = {
   app: {
     rootId: 'ice-container',
+    addProvider: ({ children }) => {
+      return (
+        <ConfigProvider
+          // @ts-ignore type
+          defaultPropsConfig={ConfigProvideConfig}
+        >
+          {children}
+        </ConfigProvider>
+      );
+    },
     getInitialData: async (ctx) => {
       const initialStates: Partial<IRootState> = {};
       // try {
