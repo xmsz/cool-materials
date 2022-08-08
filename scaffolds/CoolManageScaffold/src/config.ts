@@ -25,3 +25,5 @@ export const ConfigProvideConfig: {
     useLabelForErrorMessage: true,
   },
 };
+
+export default {};
