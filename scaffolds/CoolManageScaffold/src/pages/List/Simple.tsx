@@ -1,4 +1,4 @@
-import { Button, Pagination, Table } from '@alifd/next';
+import { Button, Divider, MenuButton, Pagination, Table } from '@alifd/next';
 import { useFusionTable } from 'ahooks';
 
 type Record = {};
@@ -28,6 +28,35 @@ function List() {
 
       <Table hasBorder={false} {...tableProps}>
         <Table.Column title="名称" dataIndex="title" />
+        <Table.Column
+          title="操作"
+          cell={(val, index, record: Record) => {
+            return (
+              <div>
+                <Button
+                  type="primary"
+                  text
+                  onClick={() => {
+                    // handleEdit(record);
+                  }}
+                >
+                  编辑
+                </Button>
+                <Divider direction="ver" />
+                <MenuButton label="更多" text type="primary">
+                  <MenuButton.Item
+                    onClick={() => {
+                      // handleDelete(record);
+                    }}
+                    className="text-red-500"
+                  >
+                    删除
+                  </MenuButton.Item>
+                </MenuButton>
+              </div>
+            );
+          }}
+        />
       </Table>
       <footer className="py-4 flex justify-end">
         <Pagination {...paginationProps} size="small" shape="arrow-only" />

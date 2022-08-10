@@ -1,22 +1,17 @@
-/* eslint-disable @iceworks/best-practices/no-http-url */
 import Unocss from 'unocss/vite';
-import { presetUno, presetIcons } from 'unocss';
-import transformerDirective from '@unocss/transformer-directives';
+import { presetUno } from 'unocss';
 
 export default {
-  publicPath: '',
   vite: true,
+  hash: true,
   vitePlugins: [
     Unocss({
-      presets: [presetUno(), presetIcons()],
-      transformers: [transformerDirective()],
+      presets: [presetUno()],
     }),
   ],
-  proxy: {
-    '/api': {
-      enable: true,
-      //       target: 'http://127.0.0.1:7001',
-      target: 'https://short-url.cpshelp.cn',
-    },
-  },
+  // proxy: {
+  //   '/api': {
+  //     target: 'http://127.0.0.1:7001',
+  //   },
+  // },
 };
