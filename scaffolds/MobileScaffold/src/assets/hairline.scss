@@ -16,7 +16,7 @@
   @for $i from 2 through 3 {
     @media (-webkit-min-device-pixel-ratio: $i), (min-device-pixel-ratio: $i) {
       width: percentage($i);
-      height: percentage($i);
+      height: 1px;
       -webkit-transform: scale(1 / $i);
       transform: scale(1 / $i);
     }
@@ -28,7 +28,7 @@
 }
 
 @mixin hairline($border-color: #ccc, $border-radius: 0, $border-style: solid) {
-  &:after {
+  &::before {
     border: 1px $border-style $border-color;
     -webkit-border-radius: $border-radius;
     border-radius: $border-radius;
@@ -47,28 +47,30 @@
 }
 
 @mixin hairline-top($border-color: #ccc, $border-style: solid) {
-  &:after {
+  &::before {
     border-top: 1px $border-style $border-color;
     @extend %border;
   }
 }
 
 @mixin hairline-right($border-color: #ccc, $border-style: solid) {
-  &:after {
+  &::before {
     border-right: 1px $border-style $border-color;
     @extend %border;
   }
 }
 
 @mixin hairline-bottom($border-color: #ccc, $border-style: solid) {
-  &:after {
+  &::before {
+    top: initial;
+    bottom: -1px;
     border-bottom: 1px $border-style $border-color;
     @extend %border;
   }
 }
 
 @mixin hairline-left($border-color: #ccc, $border-style: solid) {
-  &:after {
+  &::before {
     border-left: 1px $border-style $border-color;
     @extend %border;
   }
