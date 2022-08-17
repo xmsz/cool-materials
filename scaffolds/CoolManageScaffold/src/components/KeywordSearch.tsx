@@ -22,9 +22,21 @@ const KeywordSearch = ({ onSubmit }: { onSubmit?: (keyword?: string) => void }) 
       onChange: (value, actionType, item) => {
         setKeyword(value);
 
-        if (['itemClick', 'enter'].includes(actionType) || ['clear'].includes(item)) {
+        if (
+          [
+            'itemClick',
+            //    'enter'
+          ].includes(actionType) ||
+          ['clear'].includes(item)
+        ) {
           setCurKeyword(value);
           onSubmit?.(value);
+        }
+      },
+      onKeyDown: (e) => {
+        if (e.code === 'Enter') {
+          setCurKeyword(keyword);
+          onSubmit?.(keyword);
         }
       },
       buttonProps: {
