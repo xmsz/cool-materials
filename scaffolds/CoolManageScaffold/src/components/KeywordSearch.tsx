@@ -6,6 +6,7 @@ import { useState, useEffect, useMemo } from 'react';
 const KeywordSearch = ({ onSubmit }: { onSubmit?: (keyword?: string) => void }) => {
   const [keyword, setKeyword] = useState<string>();
   const [curKeyword, setCurKeyword] = useState<string>();
+  const [isInputComposition, setIsInputComposition] = useState(false);
 
   const [searchHistory, { put: putSearchHistory, remove: removeSearchHistory }] =
     useLocalHistory('search/searchHistory');
@@ -34,10 +35,16 @@ const KeywordSearch = ({ onSubmit }: { onSubmit?: (keyword?: string) => void }) 
         }
       },
       onKeyDown: (e) => {
-        if (e.code === 'Enter') {
+        if (e.code === 'Enter' && !isInputComposition) {
           setCurKeyword(keyword);
           onSubmit?.(keyword);
         }
+      },
+      onCompositionStart: () => {
+        setIsInputComposition(true);
+      },
+      onCompositionEnd: () => {
+        setIsInputComposition(false);
       },
       buttonProps: {
         onClickCapture: () => {
@@ -63,7 +70,7 @@ const KeywordSearch = ({ onSubmit }: { onSubmit?: (keyword?: string) => void }) 
       hasClear: true,
       autoHighlightFirstItem: false,
     };
-  }, [searchHistory, keyword]);
+  }, [searchHistory, keyword, isInputComposition]);
 
   return <Search {...searchProps} />;
 };
