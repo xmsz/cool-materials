@@ -1,3 +1,5 @@
+$nextPrefix: 'next-';
+
 html {
   line-height: 1.5;
 }
@@ -394,6 +396,28 @@ pre {
 // Overlay
 .next-overlay-wrapper .next-overlay-backdrop {
   background-color: rgba(107, 114, 128, 0.75);
+}
+
+// Tab
+.#{$nextPrefix}tabs-pure > .#{$nextPrefix}tabs-bar .#{$nextPrefix}tabs-nav-container .#{$nextPrefix}tabs-tab.active {
+  position: relative;
+  font-weight: bold;
+}
+
+.#{$nextPrefix}tabs-pure
+  > .#{$nextPrefix}tabs-bar
+  .#{$nextPrefix}tabs-nav-container
+  .#{$nextPrefix}tabs-tab.active:before {
+  position: absolute;
+  bottom: 0;
+  height: 3px;
+  left: 0;
+  right: 0;
+  margin: 0 8px;
+  background-color: var(--color-brand1-6);
+  border-top-left-radius: 100px;
+  border-top-right-radius: 100px;
+  width: auto;
 }
 
 // Table
