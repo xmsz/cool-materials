@@ -1,7 +1,7 @@
 import { Button, Divider, MenuButton, Pagination, Table } from '@alifd/next';
 import { useFusionTable } from 'ahooks';
 
-type Record = {};
+type IRecord = {};
 
 function List() {
   const { tableProps, paginationProps, refreshAsync } = useFusionTable(async ({ current, pageSize }) => {
@@ -30,7 +30,7 @@ function List() {
         <Table.Column title="名称" dataIndex="title" />
         <Table.Column
           title="操作"
-          cell={(val, index, record: Record) => {
+          cell={(val, index, record: IRecord) => {
             return (
               <div>
                 <Button
