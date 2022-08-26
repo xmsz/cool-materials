@@ -25,16 +25,10 @@ function generateWechatAuthLink({
   scope?: 'snsapi_userinfo' | 'snsapi_base';
   componentAppid?: string;
 }) {
-  const url = new URL(location.href);
-
-  // STEP: 去除code和state
-  const { code, state, ...parsed } = queryString.parse(url.search);
-  url.search = queryString.stringify(parsed);
-
   return `https://open.weixin.qq.com/connect/oauth2/authorize?${queryString.stringify({
     appid: appId,
     scope,
-    redirect_uri: decodeURIComponent(url.href),
+    redirect_uri: queryString.exclude(location.href, ['code', 'state']),
     response_type: 'code',
     state: '',
     ...(componentAppid ? { component_appid: componentAppid } : {}),
