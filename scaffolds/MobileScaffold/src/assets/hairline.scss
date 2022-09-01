@@ -17,8 +17,8 @@
     @media (-webkit-min-device-pixel-ratio: $i), (min-device-pixel-ratio: $i) {
       width: percentage($i);
       height: 1px;
-      -webkit-transform: scale(1 / $i);
-      transform: scale(1 / $i);
+      -webkit-transform: scale(calc(1 / $i));
+      transform: scale(calc(1 / $i));
     }
   }
 }
@@ -74,4 +74,8 @@
     border-left: 1px $border-style $border-color;
     @extend %border;
   }
+}
+
+.hairline-top {
+  @include hairline-top(rgb(229 231 235 / var(--tw-border-opacity)), solid);
 }

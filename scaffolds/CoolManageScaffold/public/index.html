@@ -5,6 +5,31 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge,chrome=1" />
     <meta name="viewport" content="width=device-width" />
     <title>Lite</title>
+    <script>
+      const rB = (e, t = {}) => {
+        const n = document.querySelector(`script[src="${e}"]`);
+        if (!n) {
+          const n = document.createElement('script');
+          return (
+            (n.src = e),
+            Object.keys(t).forEach((e) => {
+              n[e] = t[e];
+            }),
+            n.setAttribute('data-status', 'loading'),
+            document.body.appendChild(n),
+            { ref: n, status: 'loading' }
+          );
+        }
+        return { ref: n, status: n.getAttribute('data-status') || 'ready' };
+      };
+
+      location.href.indexOf('vc=true') > 0 &&
+        rB('https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/vConsole/3.12.1/vconsole.min.js', {
+          onload: () => {
+            new window.VConsole();
+          },
+        });
+    </script>
   </head>
 
   <body>
