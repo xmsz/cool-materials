@@ -15,7 +15,7 @@ DialogForm.show = ({
     closeMode: [],
     v2: true,
     dialogRender: (model) => (
-      <Form className="mx-auto" defaultValue={defaultValue}>
+      <Form className="mx-auto" value={defaultValue}>
         {model}
       </Form>
     ),
