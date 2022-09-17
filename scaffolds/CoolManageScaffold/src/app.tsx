@@ -8,6 +8,14 @@ import { ConfigProvider } from '@alifd/next';
 const appConfig: IAppConfig = {
   app: {
     rootId: 'ice-container',
+    errorBoundary: true,
+    onErrorBoundaryHandler: (error: Error, componentStack: string) => {
+      if (error.message.indexOf('Failed to fetch dynamically imported module') !== -1) {
+        if (confirm('应用更新，请刷新页面')) {
+          location.reload();
+        }
+      }
+    },
     addProvider: ({ children }) => {
       return (
         <ConfigProvider
