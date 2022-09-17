@@ -45,6 +45,19 @@ pre {
 @import '@alifd/theme-react/dist/next.var.css';
 // @import './assets/ic.scss';
 
+// 还在思考要不要替换
+:root {
+  --table-row-color: #111827;
+  --nav-ver-sub-nav-font-size: 14px;
+  --nav-normal-item-hover-text-style: bold;
+
+  --nav-normal-sub-nav-hover-bg-color: #f5faff;
+  --nav-normal-sub-nav-selected-bg-color: var(--nav-normal-sub-nav-hover-bg-color);
+  --nav-normal-item-childselected-text-style: bold;
+  --tab-pure-divider-border-color: var(--color-fill1-4);
+  --step-circle-item-node-font-size: 16px;
+}
+
 // 暂时无法替换
 :root {
   // Popup
@@ -73,6 +86,13 @@ pre {
 
   // Ballon
   --balloon-normal-shadow: var(--popup-local-shadow);
+}
+
+// 忘记替换
+:root {
+  --form-element-preview-text-color: var(--text-gray-800);
+  --balloon-tooltip-content-font-size: 13px;
+  --table-group-th-bg: var(--bg-gray-100);
 }
 
 :root {
@@ -104,40 +124,6 @@ pre {
   --shadow-sm: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
   --border-gray-200: rgba(229, 231, 235, var(--un-border-opacity, 1));
   --border-gray-300: rgba(209, 213, 219, var(--un-border-opacity, 1));
-}
-
-// 忘记替换
-:root {
-  --drawer-close-size: 16px;
-  --balloon-tooltip-border-width: 0px;
-  --balloon-normal-border-width: 0px;
-  --input-hover-border-color: var(--input-border-color);
-  --balloon-tooltip-color: var(--text-gray-900);
-  --balloon-tooltip-size-padding-top: 8px;
-  --balloon-tooltip-size-padding-left: 12px;
-  --balloon-tooltip-size-padding-bottom: 8px;
-  --balloon-tooltip-size-padding-right: 12px;
-  --balloon-tooltip-content-font-size: 13px;
-  --balloon-size-arrow-size: 8px;
-  --pagination-item-current-shadow: none;
-  --pagination-item-shadow: none;
-  --pagination-item-current-hover-shadow: none;
-  --shell-brand-content-background: #f9fafb;
-  --radio-font-margin-left: 8px;
-  --radio-font-margin-right: 8px;
-  --radio-font-size: 14px;
-  --table-group-th-bg: var(--bg-gray-100);
-  --form-element-preview-text-color: var(--text-gray-800);
-  --table-row-color: #111827;
-  --nav-ver-sub-nav-font-size: 14px;
-  --nav-normal-item-hover-text-style: bold;
-  --nav-normal-sub-nav-hover-bg-color: #f5faff;
-  --nav-normal-sub-nav-selected-bg-color: var(--nav-normal-sub-nav-hover-bg-color);
-  --nav-normal-item-childselected-text-style: bold;
-  --tab-pure-divider-border-color: var(--color-fill1-4);
-  --step-circle-item-node-font-size: 16px;
-  --tab-item-text-size-m: 14px;
-  --color-fill1-4: #e8eaef;
 }
 
 // List
