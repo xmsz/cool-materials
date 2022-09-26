@@ -7,10 +7,14 @@ function List() {
   const { tableProps, paginationProps, refreshAsync } = useFusionTable(async ({ current, pageSize }) => {
     // const res = await XcxService.List({ pageSize, page: current - 1 });
     // return { ...(res as Required<ListReply>) };
-    return {
-      list: [],
-      total: 0,
-    };
+    let query = `page=${current}&size=${pageSize}`;
+
+    return fetch(`https://randomuser.me/api?results=${pageSize}&${query}`)
+      .then((res) => res.json())
+      .then((res) => ({
+        total: 55,
+        list: res.results.slice(0, 10),
+      }));
   });
 
   return (

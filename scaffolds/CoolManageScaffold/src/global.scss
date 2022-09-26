@@ -768,20 +768,6 @@ pre {
   }
 }
 
-// 动态值
-.col-span-4 {
-  grid-column: span 4 / span 4;
-}
-.col-span-3 {
-  grid-column: span 3 / span 3;
-}
-.col-span-2 {
-  grid-column: span 2 / span 2;
-}
-.col-span-1 {
-  grid-column: span 1 / span 1;
-}
-
 .truncate-line-2 {
   overflow: hidden;
   text-overflow: ellipsis;
