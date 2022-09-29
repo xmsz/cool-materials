@@ -58,6 +58,18 @@ pre {
   --step-circle-item-node-font-size: 16px;
 }
 
+// Tab
+:root {
+  --tab-item-padding-lr-size-m: 0px;
+  --pagination-small-item-border-width: 0px;
+}
+.next-tabs-tab.active:before {
+  margin: 0 !important;
+}
+.next-tabs-tab {
+  margin-right: 20px;
+}
+
 // 暂时无法替换
 :root {
   // Popup
@@ -93,6 +105,7 @@ pre {
   --form-element-preview-text-color: var(--text-gray-800);
   --balloon-tooltip-content-font-size: 13px;
   --table-group-th-bg: var(--bg-gray-100);
+  --pagination-small-item-border-width: 0px;
 }
 
 :root {
