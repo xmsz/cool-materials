@@ -3,7 +3,7 @@
  * - 缓存数据
  */
 
-import { isWeChatMiniProgram } from 'universal-env';
+import { isWeChatMiniProgram } from '@uni/env';
 
 export interface TAnyObject {
   [prop: string]: any;

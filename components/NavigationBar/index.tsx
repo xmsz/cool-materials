@@ -1,11 +1,11 @@
 import { useMount } from 'ahooks';
 import { Icon } from '@alifd/meet';
-import { createElement, CSSProperties, RaxNode, useEffect, useRef, useState } from 'rax';
-import { isWeChatMiniProgram } from 'universal-env';
+import { createElement, CSSProperties, RaxNode, useState } from 'rax';
 
 import styles from './index.module.css';
 import { INavigationBarInfo, initNavigationInfo } from './navigationBar';
-import { intersectionObserver } from '@uni/apis';
+import createIntersectionObserver from '@uni/intersection-observer';
+import { isWeb, isWeChatMiniProgram } from '@uni/env';
 
 export default (props: {
   placeholder?: boolean;
@@ -36,16 +36,11 @@ export default (props: {
     fixed = true,
   } = props;
   const [data, setData] = useState<INavigationBarInfo>({
-    navigationBarHeight: 64,
-    statusBarHeight: 20,
+    navigationBarHeight: isWeb ? 48 : 64,
+    statusBarHeight: isWeb ? 0 : 20,
     capsulePosition: { bottom: 0, height: 0, left: 0, right: 0, top: 0, width: 0 },
   });
   const [isIntersect, setIsIntersect] = useState(false);
-  const observer = useRef(
-    intersectionObserver({
-      thresholds: [0],
-    }),
-  );
 
   useMount(async () => {
     if (isWeChatMiniProgram) {
@@ -54,18 +49,24 @@ export default (props: {
     }
   });
 
-  useEffect(() => {
-    observer.current.disconnect();
-    if (placeholder && fixed) {
-      observer.current
+  useMount(() => {
+    // NOTICE: 暂时仅支持首次
+    if (!placeholder || !fixed) return;
+
+    const node = document.querySelector('.navigation-bar-placeholder');
+    if (!node) return;
+    setTimeout(() => {
+      const intersectionObserver = createIntersectionObserver({ thresholds: [0] }, node['_internal']);
+
+      intersectionObserver
         .relativeToViewport({
           bottom: 0,
         })
         .observe('.navigation-bar-placeholder', (res) => {
           setIsIntersect(res.intersectionRatio === 0);
         });
-    }
-  }, [fixed, placeholder]);
+    }, 0);
+  });
 
   return (
     <>
