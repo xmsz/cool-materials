@@ -1,9 +1,28 @@
+* {
+  --input-medium-corner: 14rpx;
+  --button-large-height: 80rpx;
+  --button-small-padding-lr: 28rpx;
+}
+
+button {
+  &::after {
+    display: none;
+  }
+}
+
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 @import '@alifd/meet/es/core/index.css';
 @import './assets/ic.scss';
 @import './assets/hairline.scss';
+
+@layer base {
+  * {
+    --tw-backdrop-sepia: ;
+    --will-be-deleted: ;
+  }
+}
 
 html {
   line-height: 1.5;
@@ -44,6 +63,12 @@ body {
   color: rgb(17, 24, 39);
   padding: 0;
   margin: 0;
+}
+
+.page {
+  font-size: 24rpx;
+  background-color: rgb(243, 244, 246);
+  min-height: 100vh;
 }
 
 @font-face {
@@ -87,8 +112,8 @@ body {
 
 :root {
   --p-body-1-font-size: 24rpx;
-  --box-small-padding-hoz: 12rpx;
-  --box-small-padding-ver: 12rpx;
+  --box-small-padding-hoz: 16rpx;
+  --box-small-padding-ver: 10rpx;
   --box-small-border-radius: 999rpx;
 
   --p-body-2-font-size: 28rpx;
@@ -102,7 +127,7 @@ body {
   --box-large-padding-ver: 32rpx;
   --box-large-border-radius: 20rpx;
 
-  --color-brand-3: #f24d0c;
+  --color-brand-3: #ee1d1d;
   --color-brand-4: #f2270c;
 
   // --color-brand-3: #000;
@@ -150,4 +175,12 @@ body {
   padding-bottom: 0; /* 无小黑条的情况下，无需额外设置  */
   padding-bottom: constant(safe-area-inset-bottom); /* 兼容  iOS < 11.2 */
   padding-bottom: env(safe-area-inset-bottom); // /* iOS > 11.2 */
+}
+
+.truncate-line-2 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
