@@ -1,0 +1,22 @@
+{
+  "routes": [
+    {
+      "path": "/",
+      "source": "pages/Home/index"
+    },
+    {
+      "path": "/app/1",
+      "source": "pages/App1/index"
+    },
+    {
+      "path": "/app",
+      "source": "pages/App/index"
+    }
+  ],
+  "window": {
+    "title": "工具箱",
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTextStyle": "black",
+    "navigationStyle": "custom"
+  }
+}
