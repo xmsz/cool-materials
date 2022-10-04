@@ -1,0 +1,26 @@
+{
+  "targets": ["web", "wechat-miniprogram"],
+  "webpack5": true,
+  "hash": true,
+  "plugins": ["./build.plugin.js", "build-plugin-fusion-mobile", "build-plugin-rax-compat-react"],
+  "proxy": {
+    "/api": {
+      "enable": true,
+      "target": "http://localhost:10052/"
+    }
+  },
+  "wechat-miniprogram": {
+    "nativePackage": {
+      "autoInstall": true,
+      "dependencies": {
+        "query-string": "^7.1.1"
+      }
+    },
+    "nativeConfig": {
+      "appid": "wx689b97e76625d002",
+      "setting": {
+        "useCompilerPlugins": ["typescript"]
+      }
+    }
+  }
+}
