@@ -1,5 +1,5 @@
 import { SetOptionStruct } from '@uni/storage/types/types';
-import { getStorageSync, setStorage } from '@uni/storage';
+import { getStorageSync, setStorage, removeStorageSync } from '@uni/storage';
 
 export default class PersistenceValue<T extends SetOptionStruct['data']> {
   private _value: T;
@@ -14,7 +14,14 @@ export default class PersistenceValue<T extends SetOptionStruct['data']> {
     return this._value;
   }
 
-  set value(payload) {
+  set value(payload: T | undefined) {
+    if (typeof payload === 'undefined') {
+      // @ts-ignore
+      this._value = undefined;
+      removeStorageSync({ key: this.key });
+
+      return;
+    }
     this._value = payload;
     setStorage({
       key: this.key,

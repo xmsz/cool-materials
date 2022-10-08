@@ -7,20 +7,21 @@ export class AuthController {
   @Inject()
   jwtService: JwtService;
 
-  @Post('/auth/login')
+  @Post('/login')
   async Login(
     @Body() body: IAuthLoginReq,
     @Headers()
     headers: {
       referer: 'https://servicewechat.com/wx689b97e76625d002/devtools/page-frame.html';
-    }
+    },
   ): Promise<IAuthLoginReply> {
     const { code } = body;
-    const { referer } = headers;
-    const appId = referer
-      .match(/\/wx.+?\//i)
-      .toString()
-      .replace(/\//gi, '');
+    const appId =
+      body.appId ||
+      headers.referer
+        ?.match(/\/wx.+?\//i)
+        .toString()
+        .replace(/\//gi, '');
 
     const res = await this.jwtService.sign({
       appId,

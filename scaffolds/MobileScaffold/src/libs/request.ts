@@ -32,6 +32,7 @@ request.interceptors.response.use(
       switch (error.response.status) {
         case 401:
           // emitter.emit('unauthorized');
+          token.value = undefined;
           wx.reLaunch({ url: '/pages/Home/index' });
           break;
         default:
