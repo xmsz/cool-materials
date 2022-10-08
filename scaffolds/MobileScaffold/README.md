@@ -1,9 +1,9 @@
 ```
 pnpm create rax
 pnpm i --shamefully-hoist
-pnpm i dayjs ahooks axios @alifd/meet @uni/intersection-observer @uni/toast @uni/loading axios-miniprogram-adapter
-pnpm i build-plugin-rax-compat-react build-plugin-fusion-mobile tailwindcss postcss-rem-to-responsive-pixel weapp-tailwindcss-webpack-plugin  -D
-cp build.plugin.js tailwind.config.js NavigationBar libs interface models store
+pnpm i dayjs ahooks axios @alifd/meet @uni/intersection-observer @uni/toast @uni/loading axios-miniprogram-adapter @uni/storage
+pnpm i build-plugin-rax-compat-react build-plugin-fusion-mobile tailwindcss postcss-rem-to-responsive-pixel weapp-tailwindcss-webpack-plugin @types/wechat-miniprogram  -D
+cp build.plugin.js tailwind.config.js libs interface models store global.scss assets components app.tsx
 ```
 
 start => dev
