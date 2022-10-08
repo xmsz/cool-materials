@@ -24,7 +24,9 @@ request.interceptors.request.use(
 );
 
 request.interceptors.response.use(
-  (response) => Promise.resolve(response),
+  (response) => {
+    return Promise.resolve(response.data);
+  },
   (error) => {
     if (error.response) {
       switch (error.response.status) {

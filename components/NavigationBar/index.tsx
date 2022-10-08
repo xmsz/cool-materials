@@ -1,5 +1,4 @@
 import { useMount } from 'ahooks';
-import { Icon } from '@alifd/meet';
 import { createElement, CSSProperties, RaxNode, useState } from 'rax';
 
 import styles from './index.module.css';
@@ -98,7 +97,14 @@ export default (props: {
         />
 
         <div className={styles.Content}>
-          {back && <Icon className={styles.BtnBack} type="arrow-left" onClick={onBack} {...backProps} />}
+          {back && (
+            <div
+              className={`${styles.BtnBack} ic-round md-arrow_back_ios`}
+              type="arrow-left"
+              onClick={onBack}
+              {...backProps}
+            />
+          )}
           <div
             style={{
               flexGrow: 1,

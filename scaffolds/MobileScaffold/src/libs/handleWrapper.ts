@@ -1,5 +1,6 @@
 import showErrMessage from './showErrMessage';
-import { Message } from '@alifd/meet';
+import { showLoading, hideLoading } from '@uni/loading';
+import { showToast } from '@uni/toast';
 
 export default async <T, PAYLOAD>(
   handler: (payload?: PAYLOAD) => Promise<T>,
@@ -18,21 +19,22 @@ export default async <T, PAYLOAD>(
   } = {},
 ) => {
   try {
-    Message.loading({ title: '处理中' });
+    showLoading({ content: '处理中' });
     const res = await handler(payload);
 
-    Message.hide();
+    hideLoading();
 
     if (successText !== false) {
-      Message.success({
-        title: successText ?? '操作成功',
+      showToast({
+        type: 'success',
+        content: successText ? String(successText) : '操作成功',
       });
     }
 
     onSuccess?.(res);
   } catch (err) {
     onError?.(err);
-    Message.hide();
+    hideLoading();
     showErrMessage(err);
   } finally {
     onFinally?.();
