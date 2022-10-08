@@ -1,8 +1,8 @@
-import { token } from '@/components/Auth';
 import { isWeb } from '@uni/env';
 import axios, { AxiosRequestConfig } from 'axios';
 import mpAdapter from 'axios-miniprogram-adapter';
 import { config as appConfig } from 'rax-app';
+import { token } from './token';
 
 const request = axios.create({
   adapter: isWeb ? undefined : mpAdapter,
