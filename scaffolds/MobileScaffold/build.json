@@ -1,7 +1,7 @@
 {
   "targets": ["web", "wechat-miniprogram"],
   "webpack5": true,
-  "hash": true,
+  "hash": "contenthash",
   "plugins": ["./build.plugin.js", "build-plugin-fusion-mobile", "build-plugin-rax-compat-react"],
   "proxy": {
     "/api": {
