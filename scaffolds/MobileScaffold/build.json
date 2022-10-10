@@ -11,7 +11,7 @@
   },
   "wechat-miniprogram": {
     "template": {
-      "delete": ["live-pusher", "camera", "live-pusher"]
+      "delete": ["live-pusher", "camera", "live-player"]
     },
     "nativePackage": {
       "autoInstall": true,
