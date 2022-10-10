@@ -42,7 +42,6 @@ const Auth = ({ children }: PropsWithChildren<{}>) => {
     // STEP: 登录
     login()
       .then(({ isLogin }) => {
-        console.log(1, isLogin);
         setIsLogin(isLogin);
       })
       .catch((err) => {
