@@ -150,6 +150,26 @@ pre {
   margin-top: 4px;
 }
 
+// NumberPickerInline统一边框
+.next-number-picker-inline {
+  --btn-pure-normal-color: var(--text-gray-400);
+  .next-input:not(.next-focus) {
+    box-shadow: none;
+    border-left: none;
+    border-right: none;
+  }
+  &.next-medium {
+    .next-after .next-btn {
+      border-left: none;
+      margin-left: 0;
+    }
+    .next-before .next-btn {
+      border-right: none;
+      margin-right: 0;
+    }
+  }
+}
+
 // Card
 .next-card-header-title {
   line-height: 24px;
