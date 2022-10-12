@@ -152,6 +152,7 @@ pre {
 
 // NumberPickerInline统一边框
 .next-number-picker-inline {
+  box-shadow: var(--shadow-sm);
   --btn-pure-normal-color: var(--text-gray-400);
   .next-input:not(.next-focus) {
     box-shadow: none;
