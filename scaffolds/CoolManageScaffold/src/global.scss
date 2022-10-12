@@ -150,6 +150,14 @@ pre {
   margin-top: 4px;
 }
 
+// Step size=small
+.next-step.next-small {
+  --step-circle-item-node-process-size: 20px;
+  --step-circle-item-node-font-size: 12px;
+  --step-circle-vertical-item-title-margin-top: 2px;
+  --step-circle-item-node-padding: 6px;
+}
+
 // NumberPickerInline统一边框
 .next-number-picker-inline {
   box-shadow: var(--shadow-sm);
