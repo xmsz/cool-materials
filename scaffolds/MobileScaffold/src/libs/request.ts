@@ -1,3 +1,4 @@
+// TODO: 替换wx.reLaunch to uni
 import { isWeb } from '@uni/env';
 import axios, { AxiosRequestConfig } from 'axios';
 import mpAdapter from 'axios-miniprogram-adapter';
