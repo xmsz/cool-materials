@@ -2,9 +2,9 @@ import { CronPlanService } from '@/services/cronPlan';
 import { Button, Dialog, Divider, MenuButton, Pagination, Table } from '@alifd/next';
 import { useFusionTable, useMemoizedFn } from 'ahooks';
 import { CronPlan } from '@/interface';
-import Add from '../Add';
 import Edit from '../Edit';
 import handleWrapper from '@/libs/handleWrapper';
+import Detail from '../Detail';
 
 type IRecord = CronPlan;
 
@@ -15,14 +15,20 @@ function List() {
   });
 
   const handleAdd = useMemoizedFn(() => {
-    Add.show({
+    Edit.add({
       onSuccess: refreshAsync,
     });
   });
   const handleEdit = useMemoizedFn((record: IRecord) => {
-    Edit.show({
+    Edit.edit({
       onSuccess: refreshAsync,
       id: record.id,
+    });
+  });
+  const handleDetail = useMemoizedFn((record: IRecord) => {
+    Detail.show({
+      id: record.id,
+      onRefresh: refreshAsync,
     });
   });
   const handleDelete = useMemoizedFn((record: IRecord) => {
@@ -59,13 +65,38 @@ function List() {
         </div>
       </div>
 
-      <Table hasBorder={false} {...tableProps} className="rounded-lg overflow-hidden">
-        <Table.Column title="计划名称" dataIndex="name" />
+      <Table hasBorder={false} {...tableProps}>
+        <Table.Column
+          title="计划名称"
+          dataIndex="name"
+          cell={(val, index, record) => {
+            return (
+              <Button
+                text
+                onClick={() => {
+                  handleDetail(record);
+                }}
+              >
+                <span className="text-[13px]">{val}</span>
+              </Button>
+            );
+          }}
+        />
         <Table.Column
           title="操作"
           cell={(val, index, record: IRecord) => {
             return (
               <div>
+                <Button
+                  type="primary"
+                  text
+                  onClick={() => {
+                    handleDetail(record);
+                  }}
+                >
+                  详情
+                </Button>
+                <Divider direction="ver" />
                 <Button
                   type="primary"
                   text
@@ -91,6 +122,7 @@ function List() {
           }}
         />
       </Table>
+
       <footer className="py-4 flex justify-end">
         <Pagination {...paginationProps} size="small" shape="arrow-only" />
       </footer>

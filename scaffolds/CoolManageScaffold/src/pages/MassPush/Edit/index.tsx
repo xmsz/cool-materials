@@ -5,13 +5,14 @@ import { useMemoizedFn, useMount } from 'ahooks';
 import { CronPlan } from '@/interface';
 import dayjs from 'dayjs';
 import showErrMessage from '@/libs/showErrMessage';
+import { useMemo } from 'react';
 
 const DefaultValue: Partial<CronPlan> = {};
 interface EditProps {
   defaultValue?: typeof DefaultValue;
   onMount?: (payload: { submit: () => void }) => void;
   onSuccess?: () => void;
-  type?: 'edit' | 'add';
+  type: 'edit' | 'add' | 'preview';
   id?: number;
 }
 
@@ -19,6 +20,7 @@ const Edit = ({ onMount, onSuccess, defaultValue, type = 'edit' }: EditProps) =>
   const field = Field.useField({
     values: { ...DefaultValue, name: `推送计划 ${dayjs().format('YYYY-MM-DD HH:mm:ss')}`, ...defaultValue },
   });
+  const isPreview = useMemo(() => type === 'preview', [type]);
 
   const submit = useMemoizedFn(async () => {
     const validateRes = await field.validatePromise();
@@ -40,8 +42,8 @@ const Edit = ({ onMount, onSuccess, defaultValue, type = 'edit' }: EditProps) =>
 
   return (
     <div>
-      <div className="border border-gray-200 rounded-md bg-white p-6">
-        <Form field={field}>
+      <div className="border border-gray-200 rounded-lg bg-white p-6">
+        <Form field={field} isPreview={isPreview}>
           <Form.Item label="计划名称" name="name">
             <Input />
           </Form.Item>
@@ -53,7 +55,7 @@ const Edit = ({ onMount, onSuccess, defaultValue, type = 'edit' }: EditProps) =>
 
 Edit.show = async (props: EditProps) => {
   let defaultValue: EditProps['defaultValue'] | undefined;
-  const { type = 'edit', id } = props;
+  const { type, id } = props;
   try {
     if (type === 'edit' && id) {
       defaultValue = await CronPlanService.Detail({ id });
@@ -63,7 +65,7 @@ Edit.show = async (props: EditProps) => {
     return;
   }
 
-  let ref: { submit: () => void };
+  let ref: Parameters<Required<EditProps>['onMount']>[0];
   const inst = Drawer.show({
     title: (
       <div className="flex items-center justify-between -my-2 w-full">
@@ -98,4 +100,11 @@ Edit.show = async (props: EditProps) => {
     ),
   });
 };
+Edit.add = (props: Omit<EditProps, 'type'>) => {
+  return Edit.show({ ...props, type: 'add' });
+};
+Edit.edit = (props: Omit<EditProps, 'type'> & { id: number }) => {
+  return Edit.show({ ...props, type: 'edit' });
+};
+
 export default Edit;
