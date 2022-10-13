@@ -54,7 +54,7 @@ function List() {
         <div className="py-4 flex gap-3">
           <Button type="primary" onClick={handleAdd}>
             <i className="ic-round md-add -ml-1.5 mr-0.5 text-base" />
-            新建计划
+            创建计划
           </Button>
         </div>
       </div>

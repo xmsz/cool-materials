@@ -67,7 +67,7 @@ Edit.show = async (props: EditProps) => {
   const inst = Drawer.show({
     title: (
       <div className="flex items-center justify-between -my-2 w-full">
-        编辑{type === 'add' ? '新建' : '编辑'}推送计划
+        {type === 'add' ? '创建' : '编辑'}推送计划
         <Button
           type="primary"
           onClick={() => {
