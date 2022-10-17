@@ -56,6 +56,11 @@ pre {
   --nav-normal-item-childselected-text-style: bold;
   --tab-pure-divider-border-color: var(--color-fill1-4);
   --step-circle-item-node-font-size: 16px;
+
+  --transfer-panel-footer-padding-top-bottom: 0px;
+  --transfer-panel-border-corner: 6px;
+  --transfer-panel-footer-padding-left-right: 16px;
+  --transfer-panel-header-padding-left-right: 16px;
 }
 
 // Tab
@@ -137,6 +142,30 @@ pre {
   --shadow-sm: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
   --border-gray-200: rgba(229, 231, 235, var(--un-border-opacity, 1));
   --border-gray-300: rgba(209, 213, 219, var(--un-border-opacity, 1));
+}
+
+// Transfer
+.next-transfer {
+  --menu-background: transparent;
+  --menu-font-size: 13px;
+  .next-menu.next-ver .next-menu-item {
+    padding-top: 0;
+    padding-bottom: 0;
+    --menu-line-height: 32px;
+  }
+  .next-transfer-panel-footer {
+    border-bottom-right-radius: var(--transfer-panel-border-corner);
+    border-bottom-left-radius: var(--transfer-panel-border-corner);
+  }
+  .next-transfer-panel-header {
+    border-top-right-radius: var(--transfer-panel-border-corner);
+    border-top-left-radius: var(--transfer-panel-border-corner);
+    font-weight: bold;
+  }
+  --btn-size-m-corner: 100px;
+  --btn-size-m-padding: 7px;
+  --btn-size-m-height: 28px;
+  --popup-local-corner: 0px;
 }
 
 // List
