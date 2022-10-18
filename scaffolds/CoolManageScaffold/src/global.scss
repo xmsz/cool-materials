@@ -144,6 +144,36 @@ pre {
   --border-gray-300: rgba(209, 213, 219, var(--un-border-opacity, 1));
 }
 
+// Radio button next-radio-tab
+.next-radio-group.next-radio-tab {
+  background: #f2f3f5;
+  height: var(--radio-button-height-medium);
+  padding: 3px 3px 0;
+  border-radius: calc(var(--radio-button-corner-medium) + 3px);
+  --radio-button-bg-color: transparent;
+  --radio-button-border-color: transparent;
+  --radio-button-font-color: var(--text-gray-600);
+  --radio-button-border-color-checked: transparent;
+  --radio-button-border-color-hovered: transparent;
+  --radio-button-bg-color-hovered: #fff;
+
+  > label {
+    height: calc(var(--radio-button-height-medium) - 6px);
+    line-height: calc(var(--radio-button-height-medium) - 6px);
+    border-radius: var(--radio-button-corner-medium);
+    margin-left: 3px;
+  }
+  > label.checked {
+    font-weight: bold;
+  }
+  > label:first-child {
+    margin-left: 0px;
+  }
+  .next-radio-label {
+    line-height: calc(var(--radio-button-height-medium) - 6px);
+  }
+}
+
 // Transfer
 .next-transfer {
   --menu-background: transparent;
