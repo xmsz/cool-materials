@@ -149,7 +149,7 @@ pre {
   background: #f2f3f5;
   height: var(--radio-button-height-medium);
   padding: 3px 3px 0;
-  border-radius: calc(var(--radio-button-corner-medium) + 3px);
+  border-radius: calc(var(--radio-button-corner-medium) + 2px);
   --radio-button-bg-color: transparent;
   --radio-button-border-color: transparent;
   --radio-button-font-color: var(--text-gray-600);
