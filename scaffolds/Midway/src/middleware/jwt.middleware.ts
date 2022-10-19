@@ -33,9 +33,12 @@ export class JwtMiddleware {
       if (/^Bearer$/i.test(scheme)) {
         try {
           //jwt.verify方法验证token是否有效
-          await this.jwtService.verify(token, {
+          const res = await this.jwtService.verify(token, {
             complete: true,
           });
+          if (typeof res === 'object' && typeof res.payload === 'object') {
+            ctx.state.user = { id: res.payload.userId };
+          }
         } catch (error) {
           throw new httpError.UnauthorizedError();
         }
