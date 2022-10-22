@@ -144,6 +144,26 @@ pre {
   --border-gray-300: rgba(209, 213, 219, var(--un-border-opacity, 1));
 }
 
+// NumberPicker noBorder
+.next-number-picker {
+  .next-noborder {
+    .next-input-control {
+      transform: scale(0.8);
+      border-radius: 4px;
+      .next-btn.next-btn-normal {
+        border: none;
+        --btn-pure-normal-bg: var(--bg-gray-50);
+      }
+      .next-number-picker-up-icon {
+        transform: scale(0.8);
+      }
+      .next-number-picker-down-icon {
+        transform: scale(0.8);
+      }
+    }
+  }
+}
+
 // Radio button next-radio-tab
 .next-radio-group.next-radio-tab {
   background: #f2f3f5;
